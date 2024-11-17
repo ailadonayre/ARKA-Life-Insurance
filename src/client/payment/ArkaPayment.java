@@ -1,0 +1,131 @@
+package client.payment;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Scanner;
+
+import client.ArkaClient;
+import client.ArkaClientManager;
+import database.ArkaDatabase;
+import models.ArkaPolicy;
+
+public class ArkaPayment {
+    private String paymentID;
+    private String clientID;
+    private String policyID;
+    private LocalDate paymentDate;
+    private double paymentAmount;
+    private LocalDate nextPayment;
+    private LocalDate lastPayment;
+
+    public ArkaPayment(ArkaClient client, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
+        this.clientID = client.getClientID();
+        this.paymentDate = LocalDate.now();
+        this.paymentAmount = paymentAmount;
+        this.paymentID = new ArkaClientManager().generatePaymentID();
+
+        ArkaDatabase database = new ArkaDatabase();
+        this.policyID = database.getPolicyID(client.getClientID());
+
+        calculatePaymentDates(paymentFrequency, paymentPeriod);
+    }
+
+    private void calculatePaymentDates(String paymentFrequency, int paymentPeriod) {
+        this.lastPayment = paymentDate.plusYears(paymentPeriod);
+
+        if ("annually".equalsIgnoreCase(paymentFrequency)) {
+            this.nextPayment = paymentDate.plusYears(1);
+        }
+
+        if (paymentDate.equals(lastPayment)) {
+            this.nextPayment = null;
+        }
+    }
+
+    public void settlePayment() {
+        String checkPolicySQL = "SELECT COUNT(*) FROM policy WHERE policyID = ?";
+        try (Connection conn = database.ArkaDatabase.getConnection();
+             PreparedStatement checkStatement = conn.prepareStatement(checkPolicySQL)) {
+
+            checkStatement.setString(1, this.policyID);
+            ResultSet resultSet = checkStatement.executeQuery();
+            if (resultSet.next() && resultSet.getInt(1) == 0) {
+                System.out.println("Policy ID not found.");
+                return;
+            }
+
+            String sql = "INSERT INTO payment (paymentID, clientID, policyID, paymentDate, paymentAmount, nextPayment, lastPayment) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = conn.prepareStatement(sql)) {
+                statement.setString(1, this.paymentID);
+                statement.setString(2, this.clientID);
+                statement.setString(3, this.policyID);
+                statement.setDate(4, java.sql.Date.valueOf(this.paymentDate));
+                statement.setDouble(5, this.paymentAmount);
+                statement.setDate(6, this.nextPayment != null ? java.sql.Date.valueOf(this.nextPayment) : null);
+                statement.setDate(7, java.sql.Date.valueOf(this.lastPayment));
+
+                int rowsInserted = statement.executeUpdate();
+                if (rowsInserted > 0) {
+                    System.out.println("Payment successfully processed!");
+                    printReceipt();
+
+                    updatePolicyStatus(conn);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                System.out.println("Error processing payment.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error checking policy ID.");
+        }
+    }
+
+    private void updatePolicyStatus(Connection conn) throws SQLException {
+        String policyStatusSQL = "UPDATE policy SET status = ? WHERE policyID = ?";
+
+        try (PreparedStatement statement = conn.prepareStatement(policyStatusSQL)) {
+            if (this.paymentDate.isBefore(this.nextPayment) || this.paymentDate.isEqual(this.nextPayment)) {
+                statement.setString(1, "ACTIVE");
+            } else {
+                statement.setString(1, "INACTIVE");
+            }
+
+            statement.setString(2, this.policyID);
+            statement.executeUpdate();
+        }
+    }
+
+    private void printReceipt() {
+        ArkaClientManager clientManager = new ArkaClientManager();
+        ArkaClient client = clientManager.getClientByID(clientID);
+
+        if (client != null) {
+            String formattedName = String.format("%s %s %c. %s", client.getHonorific(), client.getFirstName(),
+                    client.getMiddleName().isEmpty() ? ' ' : client.getMiddleName().charAt(0), client.getLastName());
+
+            String formattedAmount = String.format("%.2f", paymentAmount);
+            
+            System.out.println("----- Payment Receipt -----");
+            System.out.println("Client: " + formattedName);
+            System.out.println("Payment Date: " + paymentDate);
+            System.out.println("Policy ID: " + policyID);
+            System.out.println("Amount Paid: Php " + formattedAmount);
+            System.out.println("Payment ID: " + paymentID);
+            System.out.println("Next Payment: " + (nextPayment != null ? nextPayment : "N/A"));
+            System.out.println("Last Payment: " + lastPayment);
+            System.out.println("--------------------------");
+        } else {
+            System.out.println("Error: Client not found.");
+        }
+    }
+
+    public static void collectAndProcessPayment(Scanner scanner, ArkaClient client, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
+        ArkaPayment paymentHandler = new ArkaPayment(client, policy, paymentAmount, paymentFrequency, paymentPeriod);
+        paymentHandler.settlePayment();
+    }
+}
