@@ -1,5 +1,7 @@
 package models;
 
+import utils.ArkaColors;
+
 public abstract class ArkaPolicy {
     private String policyID;
     private double premiumAmount;
@@ -12,9 +14,11 @@ public abstract class ArkaPolicy {
             }
             this.policyID = policyID;
         } catch (IllegalArgumentException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error: " + e.getMessage());
             this.policyID = "Unknown";
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("An unexpected error occurred while setting the Policy ID.");
             e.printStackTrace();
         }

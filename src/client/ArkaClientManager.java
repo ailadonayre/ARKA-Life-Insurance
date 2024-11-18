@@ -14,6 +14,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import database.ArkaDatabase;
+import utils.ArkaColors;
 
 public class ArkaClientManager extends ArkaClient {
     private List<ArkaClient> clients;
@@ -65,10 +66,12 @@ public class ArkaClientManager extends ArkaClient {
     public void addClient(ArkaClient client, String loggedInAgentID) {
         try {
             if (clientExists(client.getEmailAddress(), client.getContactNumber())) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Client with this email or phone number already exists.");
                 return;
             }
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error checking if client exists.");
             e.printStackTrace();
             return;
@@ -130,9 +133,11 @@ public class ArkaClientManager extends ArkaClient {
                 incomeStatement.executeUpdate();
             }
 
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Client successfully added.");
 
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error establishing database connection or executing queries.");
             e.printStackTrace();
         }
@@ -152,6 +157,7 @@ public class ArkaClientManager extends ArkaClient {
                 }
             }
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error retrieving agent ID: " + e.getMessage());
             e.printStackTrace();
         }
@@ -172,6 +178,7 @@ public class ArkaClientManager extends ArkaClient {
             }
             return clientID.toString();
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error generating client ID.");
             e.printStackTrace();
             return null;
@@ -197,6 +204,7 @@ public class ArkaClientManager extends ArkaClient {
     
             return policyID.toString();
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error generating policy ID.");
             e.printStackTrace();
             return null;
@@ -233,6 +241,7 @@ public class ArkaClientManager extends ArkaClient {
             }
 
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error fetching existing policy IDs from database.");
             e.printStackTrace();
         }
@@ -253,6 +262,7 @@ public class ArkaClientManager extends ArkaClient {
             }
 
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error fetching existing payment IDs from database.");
             e.printStackTrace();
         }
@@ -313,9 +323,11 @@ public class ArkaClientManager extends ArkaClient {
             }
     
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error retrieving policy or payment details.");
             e.printStackTrace();
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Unexpected error occurred while retrieving policy or payment details.");
             e.printStackTrace();
         }
@@ -367,6 +379,7 @@ public class ArkaClientManager extends ArkaClient {
                 clients.add(client);
             }
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error fetching clients from database.");
             e.printStackTrace();
         }
@@ -419,6 +432,7 @@ public class ArkaClientManager extends ArkaClient {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error fetching client by ID.");
         }
         return client;
@@ -443,6 +457,7 @@ public class ArkaClientManager extends ArkaClient {
                 clients.add(client);
             }
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error fetching clients.");
             e.printStackTrace();
         }
@@ -489,6 +504,7 @@ public class ArkaClientManager extends ArkaClient {
     
             printPolicyDetails(clientID);
         } else {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Client not found or not associated with your account.");
         }
     }
@@ -540,6 +556,7 @@ public class ArkaClientManager extends ArkaClient {
                 }
             }
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error retrieving client details: " + e.getMessage());
             e.printStackTrace();
         }

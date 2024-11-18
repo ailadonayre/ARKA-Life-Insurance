@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import utils.ArkaColors;
+
 public class ArkaClientInput {
     private Scanner scanner;
     private String agentID;
@@ -17,83 +19,106 @@ public class ArkaClientInput {
         ArkaClientManager clientManager = new ArkaClientManager();
         String clientID = clientManager.generateClientID(); 
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "\n> " + ArkaColors.ANSI_RESET);
         System.out.print("Last Name: ");
         String lastName = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("First Name: ");
         String firstName = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Middle Name: ");
         String middleName = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Honorific: ");
         String honorific = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Sex: ");
         String sex = scanner.nextLine();
 
         LocalDate dateOfBirth = null;
         while (dateOfBirth == null) {
             try {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
                 System.out.print("Date of Birth (YYYY-MM-DD): ");
                 dateOfBirth = LocalDate.parse(scanner.nextLine());
             } catch (Exception e) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Invalid date format. Please use YYYY-MM-DD.");
             }
         }
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Civil Status: ");
         String civilStatus = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Place of Birth: ");
         String placeOfBirth = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Citizenship: ");
         String citizenship = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Nationality: ");
         String nationality = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Country: ");
         String country = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Province: ");
         String province = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("City: ");
         String city = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Barangay: ");
         String barangay = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Street: ");
         String street = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Contact Number: ");
         String contactNumber = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Email Address: ");
         String emailAddress = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Occupation: ");
         String occupation = scanner.nextLine();
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Company Name (optional): ");
         String companyName = scanner.nextLine();
 
         int annualIncome = 0;
         while (true) {
             try {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
                 System.out.print("Annual Income: ");
                 annualIncome = scanner.nextInt();
                 scanner.nextLine();
                 break;
             } catch (InputMismatchException e) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Invalid input. Please enter a valid number for Annual Income.");
                 scanner.nextLine();
             }
         }
 
+        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
         System.out.print("Source of Income: ");
         String sourceIncome = scanner.nextLine();
 

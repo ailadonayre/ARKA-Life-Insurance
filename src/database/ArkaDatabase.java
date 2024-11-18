@@ -12,6 +12,7 @@ import models.ArkaGintoPlan;
 import models.ArkaPilakPlan;
 import models.ArkaPolicy;
 import models.ArkaTansoPlan;
+import utils.ArkaColors;
 
 public class ArkaDatabase {
     private static final String URL = "jdbc:mysql://localhost:3306/arka_db";
@@ -22,6 +23,7 @@ public class ArkaDatabase {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("MySQL JDBC driver not found.");
             e.printStackTrace();
         }
@@ -31,6 +33,7 @@ public class ArkaDatabase {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error connecting to the database.");
             e.printStackTrace();
             throw e;
@@ -64,7 +67,8 @@ public class ArkaDatabase {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error validating Payment ID: " + paymentID);
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.println("Error validating Payment ID: " + ArkaColors.ANSI_BOLD + paymentID + ArkaColors.ANSI_RESET);
             e.printStackTrace();
         }
 
@@ -86,7 +90,8 @@ public class ArkaDatabase {
             }
     
         } catch (SQLException e) {
-            System.out.println("Error retrieving policyID for clientID: " + clientID);
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.println("Error retrieving policyID for clientID: " + ArkaColors.ANSI_BOLD + clientID + ArkaColors.ANSI_RESET);
             e.printStackTrace();
         }
     
@@ -123,7 +128,8 @@ public class ArkaDatabase {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error retrieving policy details for Policy ID: " + policyID);
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.println("Error retrieving policy details for Policy ID: " + ArkaColors.ANSI_BOLD + policyID + ArkaColors.ANSI_RESET);
             e.printStackTrace();
         }
 
@@ -145,7 +151,8 @@ public class ArkaDatabase {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error retrieving premium amount for Policy ID: " + policyID);
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.println("Error retrieving premium amount for Policy ID: " + ArkaColors.ANSI_YELLOW + policyID + ArkaColors.ANSI_YELLOW);
             e.printStackTrace();
         }
 
@@ -167,7 +174,8 @@ public class ArkaDatabase {
             }
 
         } catch (SQLException e) {
-            System.out.println("Error retrieving payment period for Policy ID: " + policyID);
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.println("Error retrieving payment period for Policy ID: " + ArkaColors.ANSI_BOLD + policyID + ArkaColors.ANSI_RESET);
             e.printStackTrace();
         }
 

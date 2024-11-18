@@ -7,6 +7,7 @@ import client.ArkaClient;
 import client.ArkaClientManager;
 import client.payment.ArkaStatement;
 import models.ArkaPolicy;
+import utils.ArkaColors;
 
 public class ArkaBeneficiary {
     private Scanner scanner;
@@ -25,16 +26,19 @@ public class ArkaBeneficiary {
     public void collectBeneficiaryDetails(ArkaClient client) {
         try {
             if (chosenPolicy == null) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Error: Policy is not initialized.");
                 return;
             }
 
             if (client == null) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Error: Client is null.");
                 return;
             }
 
             if (client.getFullName() == null) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 System.out.println("Error: Client's full name is not available.");
                 return;
             }
@@ -61,18 +65,23 @@ public class ArkaBeneficiary {
                 throw new IllegalArgumentException("Invalid payment period. Must be 10, 20, or 35 years.");
             }
 
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("\nBeneficiary details collected.");
 
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("\nCreating your proposal statement...");
             ArkaStatement statement = new ArkaStatement(scanner, clientManager);
             statement.generateStatement(chosenPolicy, beneficiaryName, relationship, client, paymentPeriod);
 
         } catch (IllegalArgumentException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error: " + e.getMessage());
         } catch (InputMismatchException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Invalid input provided. Please ensure you're entering the correct data.");
             scanner.nextLine();
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("An unexpected error occurred: " + e.getMessage());
             e.printStackTrace();
         }

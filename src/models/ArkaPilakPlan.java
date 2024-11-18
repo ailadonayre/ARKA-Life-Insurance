@@ -1,5 +1,7 @@
 package models;
 
+import utils.ArkaColors;
+
 public class ArkaPilakPlan extends ArkaPolicy {
 
     public static final int PREMIUM_TEN_YEARS = 96000;
@@ -12,8 +14,8 @@ public class ArkaPilakPlan extends ArkaPolicy {
 
     public void displayPlan() {
         try {
-            System.out.println("\n2. Pilak (Silver Plan)");
-            System.out.println("Primary Benefits");
+            System.out.println("\n2. " + ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "Pilak (Silver Plan)" + ArkaColors.ANSI_RESET);
+            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "Primary Benefits" + ArkaColors.ANSI_RESET);
             System.out.println("Face Amount: Php 1,000,000.00");
             System.out.println("Initial Life Insurance Coverage: Php 1,000,000.00");
             System.out.println("Specific Cancer Booster Benefit: Php 500,000.00");
@@ -22,20 +24,17 @@ public class ArkaPilakPlan extends ArkaPolicy {
             System.out.println("Home Recovery Benefit: Php 620.00 per day");
             System.out.println("Palliative Care Benefit: Php 100,000.00");
 
-            System.out.println("\nSupplementary Benefits");
+            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\nSupplementary Benefits" + ArkaColors.ANSI_RESET);
             System.out.println("Accidental Death Benefit (ADB): Php 1,000,000.00");
             System.out.println("Hospital Income Benefit (HIB): Php 1,250.00 per day");
 
-            System.out.println("\nPremium Amount (10 years to pay)");
-            System.out.println("Annually: Php " + PREMIUM_TEN_YEARS + ".00");
-
-            System.out.println("\nPremium Amount (20 years to pay)");
-            System.out.println("Annually: Php " + PREMIUM_TWENTY_YEARS + ".00");
-
-            System.out.println("\nPremium Amount (35 years to pay)");
-            System.out.println("Annually: Php " + PREMIUM_THIRTY_FIVE_YEARS + ".00");
+            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\nAnnual Premium Amount" + ArkaColors.ANSI_RESET);
+            System.out.println("10 years to pay: Php " + PREMIUM_TEN_YEARS + ".00");
+            System.out.println("20 years to pay: Php " + PREMIUM_TWENTY_YEARS + ".00");
+            System.out.println("35 years to pay: Php " + PREMIUM_THIRTY_FIVE_YEARS + ".00");
 
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("An error occurred while displaying the Pilak plan details.");
             e.printStackTrace();
         }
@@ -57,6 +56,7 @@ public class ArkaPilakPlan extends ArkaPolicy {
 
         try {
             if (years != 10 && years != 20 && years != 35) {
+                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                 throw new IllegalArgumentException("Invalid number of years. Valid options are 10, 20, or 35.");
             }
 
@@ -71,13 +71,16 @@ public class ArkaPilakPlan extends ArkaPolicy {
                     premium = PREMIUM_THIRTY_FIVE_YEARS;
                     break;
                 default:
+                    System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
                     throw new IllegalArgumentException("Invalid number of years. Valid options are 10, 20, or 35.");
             }
 
         } catch (IllegalArgumentException e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("Error: " + e.getMessage());
             premium = 0.0;
         } catch (Exception e) {
+            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
             System.out.println("An unexpected error occurred while calculating the premium amount.");
             e.printStackTrace();
         }
