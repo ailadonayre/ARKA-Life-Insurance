@@ -11,7 +11,7 @@
   - [File Structure](#file_folder-file-structure)
   - [Classes](#bookmark-classes)  
   - [Build](#hammer-build)  
-- [Object-Oriented Programming Principles](#wrench-object-oriented-programming-principles)
+- [Object-Oriented Programming (OOP) Principles](#wrench-object-oriented-programming-oop-principles)
   - [Encapsulation](#lock_with_ink_pen-encapsulation)
   - [Inheritance](#envelope_with_arrow-inheritance)
   - [Polymorphism](#card_index_dividers-polymorphism)
@@ -118,7 +118,7 @@ Add a detailed introduction about the project here, everything you want the read
   ###  :hammer: Build
   If you want other people to contribute to this project, this is the section, make sure you always add this.
 
-##  :wrench: Object-Oriented Programming Principles
+##  :wrench: Object-Oriented Programming (OOP) Principles
 If you want other people to contribute to this project, this is the section, make sure you always add this.
 
   ### :lock_with_ink_pen: Encapsulation
