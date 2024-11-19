@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import client.ArkaClient;
+import utils.ArkaCustom;
 
 public class ArkaEligibility {
     private Scanner scanner;
@@ -13,15 +14,21 @@ public class ArkaEligibility {
     }
 
     public void checkEligibility(ArkaClient client) {
-        System.out.println("\nChecking eligibility for client: " + client.getFirstName() + " " + client.getLastName());
+        System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+        System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Check for Client Eligibility" + ArkaCustom.ANSI_RESET);
+        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
+        System.out.println("Checking eligibility for client: " + client.getFirstName() + " " + client.getLastName());
 
         try {
             if (client.getAnnualIncome() >= 15000) {
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Client is eligible for insurance.");
             } else {
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Client does not meet the minimum income requirement for insurance.");
             }
         } catch (Exception e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error checking eligibility: " + e.getMessage());
             e.printStackTrace();
         }
@@ -34,29 +41,36 @@ public class ArkaEligibility {
         String investmentOrBusiness = "", isFirstTime = "";
 
         try {
-            System.out.print("\nMonthly Debt: ");
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
+            System.out.print("Monthly Debt: ");
             monthlyDebt = scanner.nextDouble();
             scanner.nextLine();
 
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Monthly Savings: ");
             monthlySavings = scanner.nextDouble();
             scanner.nextLine();
 
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Monthly Emergency Fund: ");
             monthlyEmergencyFund = scanner.nextDouble();
             scanner.nextLine();
 
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Do you have any investments or businesses? (Y/N): ");
             investmentOrBusiness = scanner.nextLine();
 
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Is this your first time purchasing an insurance policy? (Y/N): ");
             isFirstTime = scanner.nextLine();
 
         } catch (InputMismatchException e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Invalid input. Please enter numeric values for debt, savings, and emergency fund.");
             scanner.nextLine();
             return 0;
         } catch (Exception e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("An error occurred while calculating the eligibility score.");
             e.printStackTrace();
             return 0;

@@ -14,7 +14,8 @@ import java.util.Scanner;
 import java.util.Set;
 
 import database.ArkaDatabase;
-import utils.ArkaColors;
+import manager.ArkaMenu;
+import utils.ArkaCustom;
 
 public class ArkaClientManager extends ArkaClient {
     private List<ArkaClient> clients;
@@ -66,24 +67,24 @@ public class ArkaClientManager extends ArkaClient {
     public void addClient(ArkaClient client, String loggedInAgentID) {
         try {
             if (clientExists(client.getEmailAddress(), client.getContactNumber())) {
-                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Client with this email or phone number already exists.");
+                new ArkaMenu().showMenu(loggedInAgentID);
                 return;
             }
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error checking if client exists.");
             e.printStackTrace();
+            new ArkaMenu().showMenu(loggedInAgentID);
             return;
         }
 
         String clientSql = "INSERT INTO client (clientID, lastName, firstName, middleName, honorific, sex, dateOfBirth, " +
                         "civilStatus, placeOfBirth, contactNumber, emailAddress, occupation, companyName, agentID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
         String addressSql = "INSERT INTO address (clientID, country, province, city, barangay, street) VALUES (?, ?, ?, ?, ?, ?)";
-    
         String citizenshipSql = "INSERT INTO citizenship (clientID, citizenship, nationality) VALUES (?, ?, ?)";
-    
         String incomeSql = "INSERT INTO income (clientID, annualIncome, sourceIncome) VALUES (?, ?, ?)";
 
         if (client.clientID == null || client.clientID.isEmpty()) {
@@ -133,13 +134,15 @@ public class ArkaClientManager extends ArkaClient {
                 incomeStatement.executeUpdate();
             }
 
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Client successfully added.");
 
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error establishing database connection or executing queries.");
             e.printStackTrace();
+            new ArkaMenu().showMenu(loggedInAgentID);
+            return;
         }
     }
 
@@ -157,7 +160,7 @@ public class ArkaClientManager extends ArkaClient {
                 }
             }
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error retrieving agent ID: " + e.getMessage());
             e.printStackTrace();
         }
@@ -178,7 +181,7 @@ public class ArkaClientManager extends ArkaClient {
             }
             return clientID.toString();
         } catch (Exception e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error generating client ID.");
             e.printStackTrace();
             return null;
@@ -204,7 +207,7 @@ public class ArkaClientManager extends ArkaClient {
     
             return policyID.toString();
         } catch (Exception e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error generating policy ID.");
             e.printStackTrace();
             return null;
@@ -241,7 +244,7 @@ public class ArkaClientManager extends ArkaClient {
             }
 
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error fetching existing policy IDs from database.");
             e.printStackTrace();
         }
@@ -262,7 +265,7 @@ public class ArkaClientManager extends ArkaClient {
             }
 
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error fetching existing payment IDs from database.");
             e.printStackTrace();
         }
@@ -294,8 +297,17 @@ public class ArkaClientManager extends ArkaClient {
                     String formattedPremiumAmount = df.format(premiumAmount);
                     String formattedCoverageAmount = df.format(coverageAmount);
     
-                    System.out.println("\n--- Policy Details ---");
-                    System.out.println("Policy Type: " + policyType);
+                    int totalLineLength = 49;
+                    String text = "Policy Information";
+
+                    int textLength = text.length();
+                    int spacesNeeded = (totalLineLength - textLength) / 2;
+                    String spaces = ArkaCustom.generateSpaces(spacesNeeded);
+
+                    System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+                    System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Policy " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
+
+                    System.out.println("\nPolicy Type: " + policyType);
                     System.out.println("Start Date: " + startDate);
                     System.out.println("End Date: " + endDate);
                     System.out.println("Premium Period: " + paymentPeriod + " years");
@@ -313,21 +325,33 @@ public class ArkaClientManager extends ArkaClient {
                     LocalDate nextPayment = paymentRs.getDate("nextPayment").toLocalDate();
                     LocalDate lastPayment = paymentRs.getDate("lastPayment").toLocalDate();
     
-                    System.out.println("\n--- Payment Details ---");
-                    System.out.println("Last Payment Date: " + paymentDate);
+                    int totalLineLength = 49;
+                    String text = "Payment Information";
+
+                    int textLength = text.length();
+                    int spacesNeeded = (totalLineLength - textLength) / 2;
+                    String spaces = ArkaCustom.generateSpaces(spacesNeeded);
+
+                    System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+                    System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Payment " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
+
+                    System.out.println("\nLast Payment Date: " + paymentDate);
                     System.out.println("Next Payment Date: " + nextPayment);
                     System.out.println("Last Date of Insurance Payment: " + lastPayment);
+
+                    System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------" + ArkaCustom.ANSI_RESET);
                 } else {
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("No payment details found for this client.");
                 }
             }
     
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error retrieving policy or payment details.");
             e.printStackTrace();
         } catch (Exception e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Unexpected error occurred while retrieving policy or payment details.");
             e.printStackTrace();
         }
@@ -379,7 +403,7 @@ public class ArkaClientManager extends ArkaClient {
                 clients.add(client);
             }
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error fetching clients from database.");
             e.printStackTrace();
         }
@@ -432,7 +456,7 @@ public class ArkaClientManager extends ArkaClient {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error fetching client by ID.");
         }
         return client;
@@ -457,7 +481,7 @@ public class ArkaClientManager extends ArkaClient {
                 clients.add(client);
             }
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error fetching clients.");
             e.printStackTrace();
         }
@@ -476,26 +500,38 @@ public class ArkaClientManager extends ArkaClient {
     public void viewClients(List<ArkaClient> clients) {
         System.out.println();
         if (clients.isEmpty()) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("No clients available.");
         } else {
             int index = 1;
             for (ArkaClient client : clients) {
                 String formattedName = String.format("%s %s %c. %s", client.honorific, client.firstName,
                         client.middleName.isEmpty() ? ' ' : client.middleName.charAt(0), client.lastName);
-                System.out.printf("\n%d. %s %s", index++, client.clientID, formattedName);
+                System.out.printf("%d. %s %s", index++, client.clientID, formattedName);
+                System.out.println();
             }
         }
     }
 
     public void searchClient(Scanner scanner, String agentID) {
+        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
         System.out.print("Enter Client ID to search: ");
         String clientID = scanner.nextLine();
     
         ArkaClient client = getClientByIDAndAgent(clientID, agentID);
     
         if (client != null) {
-            System.out.println("\n--- Client Details ---");
-            System.out.println("Client ID: " + client.getClientID());
+            int totalLineLength = 49;
+            String text = "Client Information";
+
+            int textLength = text.length();
+            int spacesNeeded = (totalLineLength - textLength) / 2;
+            String spaces = ArkaCustom.generateSpaces(spacesNeeded);
+
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Client " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
+
+            System.out.println("\nClient ID: " + client.getClientID());
             System.out.println("Name: " + client.getHonorific() + " " + client.getFirstName() + " " + 
                                client.getMiddleName().charAt(0) + ". " + client.getLastName());
             System.out.println("Date of Birth: " + client.getDateOfBirth());
@@ -504,7 +540,7 @@ public class ArkaClientManager extends ArkaClient {
     
             printPolicyDetails(clientID);
         } else {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Client not found or not associated with your account.");
         }
     }
@@ -556,11 +592,30 @@ public class ArkaClientManager extends ArkaClient {
                 }
             }
         } catch (SQLException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error retrieving client details: " + e.getMessage());
             e.printStackTrace();
         }
     
         return client;
-    }        
+    }
+    
+    public void removeClientByID(String clientID) {
+        // Remove the client from the list
+        clients.removeIf(client -> client.getClientID().equals(clientID));
+    
+        // Delete the client from the database
+        String query = "DELETE FROM client WHERE clientID = ?";
+        try (Connection connection = ArkaDatabase.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, clientID);
+            statement.executeUpdate();
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
+            System.out.println("Client with ID " + clientID + " has been deleted from the database.");
+        } catch (SQLException e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
+            System.out.println("An error occurred while deleting the client from the database: " + e.getMessage());
+        }
+    }
+    
 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import agent.ArkaAgentManager;
-import utils.ArkaColors;
+import utils.ArkaCustom;
 
 public class ArkaManagerApp {
     private ArkaAgentManager agentManager;
@@ -25,17 +25,17 @@ public class ArkaManagerApp {
         String formattedDate = currentDate.format(DateTimeFormatter.ofPattern("MMMM dd, yyyy"));
 
         while (!exit) {
-            System.out.println(ArkaColors.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaColors.ANSI_RESET);
-            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "ARKA: " + ArkaColors.ANSI_RESET + ArkaColors.ANSI_PURPLE + "Arangkada Life Insurance" + ArkaColors.ANSI_RESET);
-            System.out.println(ArkaColors.ANSI_CYAN + formattedDate + ArkaColors.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Arangkada Life Insurance" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_CYAN + formattedDate + ArkaCustom.ANSI_RESET);
             System.out.println("\n1. Sign Up\n2. Sign In\n3. Exit");
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "\n> " + ArkaColors.ANSI_RESET);
-            System.out.print("Choose an option (press 'X' to cancel): " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
+            System.out.print("Choose an option (press 'X' to cancel): " + ArkaCustom.ANSI_RESET);
 
             String input = scanner.nextLine().trim();
 
             if (input.equalsIgnoreCase("X")) {
-                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Operation canceled. Returning to the main menu.");
                 continue;
             }
@@ -44,7 +44,7 @@ public class ArkaManagerApp {
             try {
                 choice = Integer.parseInt(input);
             } catch (NumberFormatException e) {
-                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Invalid input. Please enter a number or 'X' to cancel.");
                 continue;
             }
@@ -61,17 +61,17 @@ public class ArkaManagerApp {
                             arkaMenu.showMenu(loggedInAgentID);
                         }
                     } else {
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                         System.out.println("Sign in failed. Please check your log-in credentials.");
                     }
                     break;
                 case 3:
                     exit = true;
-                    System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Exiting program...");
                     break;
                 default:
-                    System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Invalid option. Please try again.");
             }
         }

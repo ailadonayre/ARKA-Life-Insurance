@@ -15,6 +15,7 @@ import client.ArkaClient;
 import client.ArkaClientManager;
 import database.ArkaDatabase;
 import models.ArkaPolicy;
+import utils.ArkaCustom;
 
 public class ArkaStatement {
     private Scanner scanner;
@@ -27,8 +28,17 @@ public class ArkaStatement {
 
     public void generateStatement(ArkaPolicy chosenPolicy, String beneficiaryName, String relationship, ArkaClient client, int paymentPeriod) {
         try {
-            System.out.println("\n----- Proposal Statement -----");
-            System.out.println("On the Life of: " + client.getFullName());
+            int totalLineLength = 49;
+            String text = "Proposal Statement";
+
+            int textLength = text.length();
+            int spacesNeeded = (totalLineLength - textLength) / 2;
+            String spaces = ArkaCustom.generateSpaces(spacesNeeded);
+
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Proposal " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Statement" + ArkaCustom.ANSI_RESET);
+
+            System.out.println("\nOn the Life of: " + client.getFullName());
             System.out.println("Age: " + calculateAge(client.getDateOfBirth()));
             System.out.println("Chosen Insurance Plan: " + chosenPolicy.getPlanName());
             System.out.println("Payment Period: " + paymentPeriod + " years");
@@ -41,19 +51,29 @@ public class ArkaStatement {
 
             String formattedPremiumAmount = df.format(expectedPremium);
             System.out.println("Premium Amount: Php " + formattedPremiumAmount);
-    
+
             System.out.println("Beneficiary: " + beneficiaryName + " (" + relationship + ")");
-            System.out.println("-----------------------------");
-    
-            System.out.print("\nEnter payment amount (exact amount): ");
-            double paymentAmount = scanner.nextDouble();
-            scanner.nextLine();
-    
-            if (paymentAmount != expectedPremium) {
-                System.out.println("Error: The payment amount must be exactly Php " + expectedPremium + ".00 for the chosen payment period.");
-                return;
-            }
-    
+
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Payment Information" + ArkaCustom.ANSI_RESET);
+            
+            double paymentAmount = 0.0;
+
+            while (true) {
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
+                System.out.print("Enter payment amount (exact amount): ");
+                
+                paymentAmount = scanner.nextDouble();
+                scanner.nextLine();
+                
+                if (paymentAmount == expectedPremium) {
+                    break;
+                } else {
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
+                    System.out.println("Error: The payment amount must be exactly Php " + expectedPremium + ".00 for the chosen payment period.");
+                }
+            }            
+
             String paymentFrequency = "Annually";
     
             LocalDate startDate = LocalDate.now();
@@ -70,6 +90,7 @@ public class ArkaStatement {
             ArkaPayment.collectAndProcessPayment(scanner, client, chosenPolicy, paymentAmount, paymentFrequency, paymentPeriod);
     
         } catch (Exception e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("An error occurred while generating the statement: " + e.getMessage());
             e.printStackTrace();
         }
@@ -96,8 +117,10 @@ public class ArkaStatement {
             stmt.setString(12, beneficiaryRelationship); 
     
             stmt.executeUpdate();
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Policy details saved successfully.");
         } catch (SQLException e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error saving policy details to the database.");
             e.printStackTrace();
         }
@@ -115,6 +138,7 @@ public class ArkaStatement {
                 policyIDs.add(rs.getString("policyID"));
             }
         } catch (SQLException e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error retrieving existing policy IDs.");
             e.printStackTrace();
         }
@@ -129,6 +153,7 @@ public class ArkaStatement {
                 return period.getYears();
             }
         } catch (Exception e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error calculating age: " + e.getMessage());
         }
         return 0;

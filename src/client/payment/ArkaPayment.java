@@ -11,6 +11,7 @@ import client.ArkaClient;
 import client.ArkaClientManager;
 import database.ArkaDatabase;
 import models.ArkaPolicy;
+import utils.ArkaCustom;
 
 public class ArkaPayment {
     private String paymentID;
@@ -53,6 +54,7 @@ public class ArkaPayment {
             checkStatement.setString(1, this.policyID);
             ResultSet resultSet = checkStatement.executeQuery();
             if (resultSet.next() && resultSet.getInt(1) == 0) {
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Policy ID not found.");
                 return;
             }
@@ -69,6 +71,7 @@ public class ArkaPayment {
 
                 int rowsInserted = statement.executeUpdate();
                 if (rowsInserted > 0) {
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Payment successfully processed!");
                     printReceipt();
 
@@ -77,10 +80,12 @@ public class ArkaPayment {
 
             } catch (SQLException e) {
                 e.printStackTrace();
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Error processing payment.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error checking policy ID.");
         }
     }
@@ -110,16 +115,25 @@ public class ArkaPayment {
 
             String formattedAmount = String.format("%.2f", paymentAmount);
             
-            System.out.println("----- Payment Receipt -----");
-            System.out.println("Client: " + formattedName);
+            int totalLineLength = 49;
+            String text = "Payment Receipt";
+
+            int textLength = text.length();
+            int spacesNeeded = (totalLineLength - textLength) / 2;
+            String spaces = ArkaCustom.generateSpaces(spacesNeeded);
+
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Payment " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Receipt" + ArkaCustom.ANSI_RESET);
+
+            System.out.println("\nClient: " + formattedName);
             System.out.println("Payment Date: " + paymentDate);
             System.out.println("Policy ID: " + policyID);
             System.out.println("Amount Paid: Php " + formattedAmount);
             System.out.println("Payment ID: " + paymentID);
             System.out.println("Next Payment: " + (nextPayment != null ? nextPayment : "N/A"));
             System.out.println("Last Payment: " + lastPayment);
-            System.out.println("--------------------------");
         } else {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error: Client not found.");
         }
     }

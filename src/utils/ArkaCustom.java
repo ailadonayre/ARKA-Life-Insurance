@@ -1,6 +1,6 @@
 package utils;
 
-public abstract class ArkaColors {
+public abstract class ArkaCustom {
     // For console customization
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BOLD = "\033[0;1m";
@@ -12,4 +12,12 @@ public abstract class ArkaColors {
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
+
+    public static String generateSpaces(int count) {
+        StringBuilder spaces = new StringBuilder();
+        for (int i = 0; i < count; i++) {
+            spaces.append(" ");
+        }
+        return spaces.toString();
+    }
 }

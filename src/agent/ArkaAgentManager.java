@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import database.ArkaDatabase;
-import utils.ArkaColors;
+import utils.ArkaCustom;
 
 public class ArkaAgentManager {
     private Scanner scanner = new Scanner(System.in);
@@ -24,9 +24,9 @@ public class ArkaAgentManager {
         String password = null;
 
         try {
-            System.out.println(ArkaColors.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaColors.ANSI_RESET);
-            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "ARKA: " + ArkaColors.ANSI_RESET + ArkaColors.ANSI_PURPLE + "Create an account" + ArkaColors.ANSI_RESET);
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "\n> " + ArkaColors.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Create an account" + ArkaCustom.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
             System.out.print("Enter username (must have at least four characters): ");
             username = scanner.nextLine();
             if (username.trim().isEmpty()) {
@@ -36,7 +36,7 @@ public class ArkaAgentManager {
                 throw new IllegalArgumentException("Username must be at least 4 characters long.");
             }
 
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Enter password (must have at least eight characters): ");
             password = scanner.nextLine();
             if (password.trim().isEmpty()) {
@@ -52,7 +52,7 @@ public class ArkaAgentManager {
                     checkStatement.setString(1, username);
                     ResultSet resultSet = checkStatement.executeQuery();
                     if (resultSet.next() && resultSet.getInt(1) > 0) {
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                         System.out.println("Error: Username already exists. Please choose a different username.");
                         return;
                     }
@@ -67,27 +67,27 @@ public class ArkaAgentManager {
 
                     int rowsInserted = statement.executeUpdate();
                     if (rowsInserted > 0) {
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                         System.out.println("You have successfully signed up!");
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
-                        System.out.println("Agent ID: " + ArkaColors.ANSI_BOLD + agentID + ArkaColors.ANSI_RESET);
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
+                        System.out.println("Agent ID: " + ArkaCustom.ANSI_BOLD + agentID + ArkaCustom.ANSI_RESET);
                     }
                 } catch (SQLException e) {
-                    System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Database error occurred while signing up.");
                     e.printStackTrace();
                 }
             } catch (SQLException e) {
-                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Error establishing a database connection during sign-up.");
                 e.printStackTrace();
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error: " + e.getMessage());
         } catch (Exception e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("An unexpected error occurred during sign-up.");
             e.printStackTrace();
         }
@@ -98,16 +98,16 @@ public class ArkaAgentManager {
         String password = null;
 
         try {
-            System.out.println(ArkaColors.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaColors.ANSI_RESET);
-            System.out.println(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "ARKA: " + ArkaColors.ANSI_RESET + ArkaColors.ANSI_PURPLE + "Sign in to your Account" + ArkaColors.ANSI_RESET);
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "\n> " + ArkaColors.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
+            System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Sign in to your Account" + ArkaCustom.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
             System.out.print("Enter username or agent ID: ");
             identifier = scanner.nextLine();
             if (identifier.trim().isEmpty()) {
                 throw new IllegalArgumentException("Username/Agent ID cannot be empty.");
             }
 
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_PURPLE + "> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "> " + ArkaCustom.ANSI_RESET);
             System.out.print("Enter password: ");
             password = scanner.nextLine();
             if (password.trim().isEmpty()) {
@@ -124,33 +124,33 @@ public class ArkaAgentManager {
                     ResultSet resultSet = statement.executeQuery();
                     if (resultSet.next()) {
                         loggedInAgentID = resultSet.getString("agentID");
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + "\t>> " + ArkaColors.ANSI_RESET);
-                        System.out.println("You have successfully signed in as " + ArkaColors.ANSI_BOLD + ArkaColors.ANSI_CYAN + resultSet.getString("username") + ArkaColors.ANSI_RESET + "!");
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
+                        System.out.println("You have successfully signed in as " + ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + resultSet.getString("username") + ArkaCustom.ANSI_RESET + "!");
                         return true;
                     } else {
-                        System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                        System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                         System.out.println("Invalid username/agent ID or password. Please try again.");
                         return false;
                     }
                 } catch (SQLException e) {
-                    System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                    System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Database error occurred during sign-in.");
                     e.printStackTrace();
                     return false;
                 }
             } catch (SQLException e) {
-                System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+                System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Error establishing a database connection during sign-in.");
                 e.printStackTrace();
                 return false;
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error: " + e.getMessage());
             return false;
         } catch (Exception e) {
-            System.out.print(ArkaColors.ANSI_BOLD + ArkaColors.ANSI_YELLOW + "\t>> " + ArkaColors.ANSI_RESET);
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("An unexpected error occurred during sign-in.");
             e.printStackTrace();
             return false;
