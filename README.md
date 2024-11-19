@@ -4,10 +4,9 @@
 ## :ledger: Index
 
 - [About](#beginner-about)
-- [Usage](#zap-usage)
-  - [Installation](#electric_plug-installation)
-  - [Commands](#package-commands)
-- [Development](#wrench-development)
+  - [Objectives](#clipboard-objectives)
+  - [Sustainable Development Goals (SDGs)](#seedling-sdg)
+- [Development](#hammer_and_wrench-development)
   - [Pre-Requisites](#notebook-pre-requisites)
   - [Developmen Environment](#nut_and_bolt-development-environment)
   - [File Structure](#file_folder-file-structure)
