@@ -26,142 +26,136 @@
 ##  :beginner: About
 Add a detailed introduction about the project here, everything you want the reader to know.
 
-##  :hourglass: Objectives
+  ###  :clipboard: Objectives
+  Add a detailed introduction about the project here, everything you want the reader to know.
+  
+  ### :seedling: Sustainable Development Goals (SDGs)
+  - <b>SDG 1: No Poverty</b> - description
+  - <b>SDG 3: Good Health and Well-being</b> - description
+  - <b>SDG 8: Decent Work and Economic Growth</b> - description
+  - <b>SDG 9: Industry, Innovation, and Infrastructure</b> - description
+  - <b>SDG 11: Sustainable Cities and Communities</b> - description
+
+##  :hammer_and_wrench: Development
 Add a detailed introduction about the project here, everything you want the reader to know.
 
-## :seedling: Sustainable Development Goals (SDGs)
-Write about how to use this project.
+  ###  :memo: Features
+  If you want other people to contribute to this project, this is the section, make sure you always add this.
+  - User Management
+    - Sign up, sign in, and log out methods
+    - Unique and random ID generation for agents, clients, policies, and payments
+  - Menu System
+    - Display, add, search, and update methods
+  - Agent Management
+  - Client Management
+  - Policy Management
+  - Payment Management
+  - Input and Data Validation
+  - Arithmetic Computations
+  - Database Management System (MySQL)
+    - Database Connection
+    - Data Storage
+    - CRUD Operations
+  - Formatted Console
+  - Exception Handling
+  
+  ###  :file_folder: File Structure
+  Add a file structure here with the basic details about files, below is an example.
+  
+  ```
+  ├── src
+  │   ├── agent
+  │   │   ├── ArkaAgent.java
+  │   │   └── ArkaAgentManager.java
+  │   ├── client
+  │   │   ├── payment
+  │   │   │   ├── ArkaPayment.java
+  │   │   │   ├── ArkaStatement.java
+  │   │   │   └── ArkaUpdatePayment.java
+  │   │   ├── policy
+  │   │   │   ├── ArkaBeneficiary.java
+  │   │   │   ├── ArkaEligibility.java
+  │   │   │   └── ArkaPolicyRecommender.java
+  │   │   ├── ArkaClient.java
+  │   │   ├── ArkaClientInput.java
+  │   │   └── ArkaClientManager.java
+  │   ├── database
+  │   │   └── ArkaDatabase.java
+  │   ├── main
+  │   │   └── Main.java
+  │   ├── manager
+  │   │   ├── ArkaManagerApp.java
+  │   │   └── ArkaMenu.app
+  │   ├── models
+  │   │   ├── ArkaGintoPlan.java
+  │   │   ├── ArkaPilakPlan.java
+  │   │   ├── ArkaPolicy.java
+  │   │   └── ArkaTansoPlan.java
+  │   └── utils
+  │       └── ArkaCustom.java
+  ```
+  ###  :bookmark: Classes
+  
+  | No | Class Name | Purpose 
+  |----|------------|-------|
+  | 1  | Main | Entry point
+  | 2  | ArkaDatabase | Entry point
+  | 3  | ArkaCustom | Entry point
+  | 4  | ArkaAgent | Entry point
+  | 5  | ArkaAgentManager | Entry point
+  | 6  | ArkaClient | Entry point
+  | 7  | ArkaClientManager | Entry point
+  | 8  | ArkaPolicy | Entry point
+  | 9  | ArkaGintoPlan | Entry point
+  | 10  | ArkaPilakPlan | Entry point
+  | 11  | ArkaTansoPlan | Entry point
+  | 12  | ArkaManagerApp | Contains the sign up, sign in, and log out menu
+  | 13  | ArkaMenu | Entry point
+  | 14  | ArkaClientInput | Entry point
+  | 15  | ArkaEligibility | Entry point
+  | 16  | ArkaPolicyRecommender | Entry point
+  | 17  | ArkaBeneficiary | Entry point
+  | 18  | ArkaStatement | Entry point
+  | 19  | ArkaPayment | Entry point
+  | 20  | ArkaUpdatePayment | Entry point
+  
+  ###  :hammer: Build Instructions
+  If you want other people to contribute to this project, this is the section, make sure you always add this.
 
-###  :electric_plug: Installation
-- Steps on how to install this project, to use it.
-- Be very detailed here, For example, if you have tools which run on different operating systems, write installation steps for all of them.
-
-```
-$ add installations steps if you have to.
-```
-
-###  :package: Commands
-- Commands to start the project.
-
-##  :wrench: Development
+##  :wrench: Object-Oriented Programming Principles
 If you want other people to contribute to this project, this is the section, make sure you always add this.
 
-### :notebook: Pre-Requisites
-List all the pre-requisites the system needs to develop this project.
-- A tool
-- B tool
+  ### :lock_with_ink_pen: Encapsulation
+  List all the pre-requisites the system needs to develop this project.
+  - A tool
+  - B tool
+  
+  ###  :envelope_with_arrow: Inheritance
+  Write about setting up the working environment for your project.
+  - How to download the project...
+  - How to install dependencies...
+  
+  ```
+  public class ArkaGintoPlan extends ArkaPolicy {
+  ```
+  
+  ###  :card_index_dividers: Polymorphism
+  Write about setting up the working environment for your project.
+  - How to download the project...
+  - How to install dependencies...
+  
+  ###  :key: Abstraction
+  Write about setting up the working environment for your project.
+  - How to download the project...
+  - How to install dependencies...
+  
+  ```
+  public abstract class ArkaPolicy {
+  ```
 
-###  :nut_and_bolt: Development Environment
-Write about setting up the working environment for your project.
-- How to download the project...
-- How to install dependencies...
-
-###  :file_folder: File Structure
-Add a file structure here with the basic details about files, below is an example.
-
-```
-├── src
-│   ├── agent
-│   │   ├── ArkaAgent.java
-│   │   └── ArkaAgentManager.java
-│   ├── client
-│   │   ├── payment
-│   │   │   ├── ArkaPayment.java
-│   │   │   ├── ArkaStatement.java
-│   │   │   └── ArkaUpdatePayment.java
-│   │   ├── policy
-│   │   │   ├── ArkaBeneficiary.java
-│   │   │   ├── ArkaEligibility.java
-│   │   │   └── ArkaPolicyRecommender.java
-│   │   ├── ArkaClient.java
-│   │   ├── ArkaClientInput.java
-│   │   └── ArkaClientManager.java
-│   ├── database
-│   │   ├── ArkaDatabase.java
-│   ├── main
-│   │   ├── Main.java
-│   ├── manager
-│   │   ├── ArkaManagerApp.java
-│   │   └── ArkaMenu.app
-│   ├── models
-│   │   ├── ArkaGintoPlan.java
-│   │   ├── ArkaPilakPlan.java
-│   │   ├── ArkaPolicy.java
-│   │   └── ArkaTansoPlan.java
-│   └── utils
-│       └── ArkaCustom.java
-└──
-```
-
-| No | File Name | Details 
-|----|------------|-------|
-| 1  | index | Entry point
-
-###  :hammer: Build
-Write the build Instruction here.
-
-### :rocket: Deployment
-Write the deployment instruction here.
-
-## :cherry_blossom: Community
+## :cherry_blossom: About the Developer
 
 If it's open-source, talk about the community here, ask social media links and other links.
 
- ###  :fire: Contribution
-
- Your contributions are always welcome and appreciated. Following are the things you can do to contribute to this project.
-
- 1. **Report a bug** <br>
- If you think you have encountered a bug, and I should know about it, feel free to report it [here]() and I will take care of it.
-
- 2. **Request a feature** <br>
- You can also request for a feature [here](), and if it will viable, it will be picked for development.  
-
- 3. **Create a pull request** <br>
- It can't get better then this, your pull request will be appreciated by the community. You can get started by picking up any open issues from [here]() and make a pull request.
-
- > If you are new to open-source, make sure to check read more about it [here](https://www.digitalocean.com/community/tutorial_series/an-introduction-to-open-source) and learn more about creating a pull request [here](https://www.digitalocean.com/community/tutorials/how-to-create-a-pull-request-on-github).
-
-
- ### :cactus: Branches
-
- I use an agile continuous integration methodology, so the version is frequently updated and development is really fast.
-
-1. **`stage`** is the development branch.
-
-2. **`master`** is the production branch.
-
-3. No other permanent branches should be created in the main repository, you can create feature branches but they should get merged with the master.
-
-**Steps to work with feature branch**
-
-1. To start working on a new feature, create a new branch prefixed with `feat` and followed by feature name. (ie. `feat-FEATURE-NAME`)
-2. Once you are done with your changes, you can raise PR.
-
-**Steps to create a pull request**
-
-1. Make a PR to `stage` branch.
-2. Comply with the best practices and guidelines e.g. where the PR concerns visual elements it should have an image showing the effect.
-3. It must pass all continuous integration checks and get positive reviews.
-
-After this, changes will be merged.
-
-
-### :exclamation: Guideline
-coding guidelines or other things you want people to follow should follow.
-
-
-## :question: FAQ
-You can optionally add a FAQ section about the project.
-
-##  :page_facing_up: Resources
-Add important resources here
-
-##  :camera: Gallery
-Pictures of your project.
-
-## :star2: Credit/Acknowledgment
+## :star2: Acknowledgment
 Credit the authors here.
-
-##  :lock: License
-Add a license here, or a link to it.
