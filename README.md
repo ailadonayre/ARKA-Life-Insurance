@@ -5,7 +5,7 @@
 
 - [About](#beginner-about)
   - [Objectives](#clipboard-objectives)
-  - [Sustainable Development Goals (SDGs)](#seedling-sustainable-development-goals-(sdgs))
+  - [Sustainable Development Goals (SDGs)](#seedling-sustainable-development-goals-sdgs)
 - [Development](#hammer_and_wrench-development)
   - [Features](#memo-features)
   - [File Structure](#file_folder-file-structure)
@@ -25,7 +25,7 @@ Add a detailed introduction about the project here, everything you want the read
   ###  :clipboard: Objectives
   Add a detailed introduction about the project here, everything you want the reader to know.
   
-  ### :seedling: Sustainable Development Goals
+  ### :seedling: Sustainable Development Goals (SDGs)
   - <b>SDG 1: No Poverty</b> - description
   - <b>SDG 3: Good Health and Well-being</b> - description
   - <b>SDG 8: Decent Work and Economic Growth</b> - description
