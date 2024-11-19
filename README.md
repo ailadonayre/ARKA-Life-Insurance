@@ -5,22 +5,19 @@
 
 - [About](#beginner-about)
   - [Objectives](#clipboard-objectives)
-  - [Sustainable Development Goals (SDGs)](#seedling-sdg)
+  - [Sustainable Development Goals (SDGs)](#seedling-sustainable-development-goals-(sdgs))
 - [Development](#hammer_and_wrench-development)
-  - [Pre-Requisites](#notebook-pre-requisites)
-  - [Developmen Environment](#nut_and_bolt-development-environment)
+  - [Features](#memo-features)
   - [File Structure](#file_folder-file-structure)
+  - [Classes](#bookmark-classes)  
   - [Build](#hammer-build)  
-  - [Deployment](#rocket-deployment)  
-- [Community](#cherry_blossom-community)
-  - [Contribution](#fire-contribution)
-  - [Branches](#cactus-branches)
-  - [Guideline](#exclamation-guideline)  
-- [FAQ](#question-faq)
-- [Resources](#page_facing_up-resources)
-- [Gallery](#camera-gallery)
-- [Credit/Acknowledgment](#star2-creditacknowledgment)
-- [License](#lock-license)
+- [Object-Oriented Programming Principles](#wrench-object-oriented-programming-principles)
+  - [Encapsulation](#lock_with_ink_pen-encapsulation)
+  - [Inheritance](#envelope_with_arrow-inheritance)
+  - [Polymorphism](#card_index_dividers-polymorphism)
+  - [Abstraction](#key-abstraction)  
+- [About the Developer](#cherry_blossom-about-the-developer)
+- [Acknowledgment](#star2-acknowledgment)
 
 ##  :beginner: About
 Add a detailed introduction about the project here, everything you want the reader to know.
@@ -28,7 +25,7 @@ Add a detailed introduction about the project here, everything you want the read
   ###  :clipboard: Objectives
   Add a detailed introduction about the project here, everything you want the reader to know.
   
-  ### :seedling: Sustainable Development Goals (SDGs)
+  ### :seedling: Sustainable Development Goals
   - <b>SDG 1: No Poverty</b> - description
   - <b>SDG 3: Good Health and Well-being</b> - description
   - <b>SDG 8: Decent Work and Economic Growth</b> - description
@@ -118,7 +115,7 @@ Add a detailed introduction about the project here, everything you want the read
   | 19  | ArkaPayment | Entry point
   | 20  | ArkaUpdatePayment | Entry point
   
-  ###  :hammer: Build Instructions
+  ###  :hammer: Build
   If you want other people to contribute to this project, this is the section, make sure you always add this.
 
 ##  :wrench: Object-Oriented Programming Principles
