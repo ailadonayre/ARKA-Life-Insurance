@@ -35,7 +35,7 @@ recommendations aligned with the client's needs and capacity.
   - Provide protection against large, unprecedented risks and accidental losses
   - Ensure financial security and stability in the long run
   - Guaranteed recompense to listed beneficiaries in unforeseen events
-  - Benefit coverage extends from property damages to post-hospitalization compensation
+  - Benefits coverage extends from property damages to post-hospitalization compensation
 
   ### :seedling: Sustainable Development Goals (SDGs)
   - <b>SDG 1: No Poverty</b> - description
