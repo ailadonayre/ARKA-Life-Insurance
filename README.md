@@ -1,5 +1,6 @@
 # ARKA: Arangkada Life Insurance
-<b>ARKA: Arangkada Life Insurance</b> is developed to grant middle to low-income Filipino families a lifetime safety net with insurance policies of varying benefits marked at a fair price.
+<b>ARKA: Arangkada Life Insurance</b> is the lifetime safety net of middle to low-income Filipino families with insurance policies of varying 
+benefits marked at a fair price.
 
 ## :ledger: Index
 
@@ -20,11 +21,22 @@
 - [Acknowledgment](#star2-acknowledgment)
 
 ##  :beginner: About
-Add a detailed introduction about the project here, everything you want the reader to know.
+<b>ARKA Life Insurance</b>, from the Filipino word *arangkada* - meaning "to accelerate" - champions the progression and wellbeing of the general 
+Filipino populace, with emphasis to the more marginalized sectors of the country. Low to lower-middle class families, minimum wage earners, and even 
+students, are the prime target demographic of ARKA's insurance policies. 
+<br/>
+This program is to be used specifically by insurance agents under ARKA as they record their client's personal information and financial standing. 
+As it is imperative for clients to maintain the regularity of their payments, ARKA has also devised a criteria to ascertain the eligibility of individuals 
+applying for an insurance plan by means of assessing their financial constraints. The obtained information then displays the most optimum policy 
+recommendations aligned with the client's needs and capacity.
 
   ###  :clipboard: Objectives
-  Add a detailed introduction about the project here, everything you want the reader to know.
-  
+  - Promote quality treatment and services to the disadvantaged and vulnerable members of society
+  - Provide protection against large, unprecedented risks and accidental losses
+  - Ensure financial security and stability in the long run
+  - Guaranteed recompense to listed beneficiaries in unforeseen events
+  - Benefit coverage extends from property damages to post-hospitalization compensation
+
   ### :seedling: Sustainable Development Goals (SDGs)
   - <b>SDG 1: No Poverty</b> - description
   - <b>SDG 3: Good Health and Well-being</b> - description
@@ -95,25 +107,25 @@ Add a detailed introduction about the project here, everything you want the read
   | No | Class Name | Purpose 
   |----|------------|-------|
   | 1  | Main | Entry point
-  | 2  | ArkaDatabase | Entry point
-  | 3  | ArkaCustom | Entry point
-  | 4  | ArkaAgent | Entry point
-  | 5  | ArkaAgentManager | Entry point
-  | 6  | ArkaClient | Entry point
-  | 7  | ArkaClientManager | Entry point
-  | 8  | ArkaPolicy | Entry point
-  | 9  | ArkaGintoPlan | Entry point
-  | 10  | ArkaPilakPlan | Entry point
-  | 11  | ArkaTansoPlan | Entry point
-  | 12  | ArkaManagerApp | Contains the sign up, sign in, and log out menu
-  | 13  | ArkaMenu | Entry point
-  | 14  | ArkaClientInput | Entry point
-  | 15  | ArkaEligibility | Entry point
-  | 16  | ArkaPolicyRecommender | Entry point
-  | 17  | ArkaBeneficiary | Entry point
-  | 18  | ArkaStatement | Entry point
-  | 19  | ArkaPayment | Entry point
-  | 20  | ArkaUpdatePayment | Entry point
+  | 2  | ArkaDatabase | Contains the database connection and direct manipulation of tables
+  | 3  | ArkaCustom | Separate class for console formatting
+  | 4  | ArkaAgent | Includes the attributes of agent
+  | 5  | ArkaAgentManager | Contains the methods for signing up and signing in
+  | 6  | ArkaClient | Includes the attributes of client
+  | 7  | ArkaClientManager | Composed of all the methods in correlation with client
+  | 8  | ArkaPolicy | Abstract class containing the shared attributes of the policies
+  | 9  | ArkaGintoPlan | Contains information about the Ginto Plan; a concrete subclass of ```ArkaPolicy```
+  | 10  | ArkaPilakPlan | Contains information about the Pilak Plan; a concrete subclass of ```ArkaPolicy```
+  | 11  | ArkaTansoPlan | Contains information about the Tanso Plan; a concrete subclass of ```ArkaPolicy```
+  | 12  | ArkaManagerApp | Initial menu (sign up and sign in)
+  | 13  | ArkaMenu | Agent menu (menu navigation for the main functionalities)
+  | 14  | ArkaClientInput | Encompasses the inputs of the client's biodata
+  | 15  | ArkaEligibility | Includes the calculation of client's eligibility score and financial validation
+  | 16  | ArkaPolicyRecommender | Obtains data from ```ArkaEligibility``` to form policy recommendations
+  | 17  | ArkaBeneficiary | Collects the beneficiary details of the client
+  | 18  | ArkaStatement | Composes the proposal statement of the client
+  | 19  | ArkaPayment | Processes the insurance payment of the client
+  | 20  | ArkaUpdatePayment | Updates the client's insurance statement upon validating the next payment date
   
   ###  :hammer: Build
   If you want other people to contribute to this project, this is the section, make sure you always add this.
@@ -150,8 +162,10 @@ If you want other people to contribute to this project, this is the section, mak
   ```
 
 ## :cherry_blossom: About the Developer
-
 If it's open-source, talk about the community here, ask social media links and other links.
 
 ## :star2: Acknowledgment
-Credit the authors here.
+To <b>Miss Fatima Marie Agdon</b>, this project would not have proven its success without your transformative pedagogical methods and invaluable 
+share of knowledge in Java programming and the principles of object-oriented programming. The accomplishment of this program is not only a fruit 
+of all the hard work poured into its ideation and materialization, but also a testament of your excellent mentorship this semester. Thank you for 
+your support and guidance. 
