@@ -12,7 +12,7 @@ benefits marked at a fair price.
   - [Build](#hammer-build)  
   - [File Structure](#file_folder-file-structure)
   - [Classes](#bookmark-classes)  
-- [Object-Oriented Programming (OOP) Principles](#wrench-object-oriented-programming-oop-principles)
+- [Object-Oriented Programming Principles](#wrench-object-oriented-programming-principles)
   - [Encapsulation](#lock_with_ink_pen-encapsulation)
   - [Inheritance](#envelope_with_arrow-inheritance)
   - [Polymorphism](#card_index_dividers-polymorphism)
@@ -134,7 +134,7 @@ Add a detailed introduction about the project here, everything you want the read
   | 19  | ArkaPayment | Processes the insurance payment of the client
   | 20  | ArkaUpdatePayment | Updates the client's insurance statement upon validating the next payment date
   
-##  :wrench: Object-Oriented Programming (OOP) Principles
+##  :wrench: Object-Oriented Programming Principles
 Object-oriented programming is one of the programming paradigms that is distinguished by objects and classes. It implements principles such as 
 **encapsulation, inheritance, polymorphism,** and **abstraction** among others to systematically arrange a collection of data into one central module known 
 as a class.
