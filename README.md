@@ -1,4 +1,4 @@
-<img src="images/ARKA banner.jpg" alt="ARKA Arangkada Life Insurance Banner">
+<img src="images/ARKA Banner 2.jpg" alt="ARKA Arangkada Life Insurance Banner">
 
 # ARKA: Arangkada Life Insurance
 **ARKA: Arangkada Life Insurance** is the lifetime safety net of middle to low-income Filipino families with insurance policies of varying 
