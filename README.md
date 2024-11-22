@@ -5,18 +5,20 @@ benefits marked at a fair price.
 ## :ledger: Index
 
 - [About](#beginner-about)
-  - [Objectives](#clipboard-objectives)
+  - [Objectives](#dart-objectives)
   - [Sustainable Development Goals (SDGs)](#seedling-sustainable-development-goals-sdgs)
 - [Project Development](#hammer_and_wrench-project-development)
-  - [Program Features](#memo-program-features)
-  - [Build](#hammer-build)  
+  - [Prerequisites](#clipboard-prerequisites)
+  - [Build Instructions](#hammer-build-instructions)
   - [File Structure](#file_folder-file-structure)
-  - [Classes](#bookmark-classes)  
+  - [Program Features](#memo-program-features)
+  - [Classes](#bookmark-classes)
 - [Object-Oriented Programming Principles](#wrench-object-oriented-programming-principles)
   - [Encapsulation](#lock_with_ink_pen-encapsulation)
   - [Inheritance](#envelope_with_arrow-inheritance)
   - [Polymorphism](#card_index_dividers-polymorphism)
-  - [Abstraction](#key-abstraction)  
+  - [Abstraction](#key-abstraction)
+- [Future Prospects](#hourglass_flowing_sand-future-prospects)
 - [About the Developer](#cherry_blossom-about-the-developer)
 - [Acknowledgment](#star2-acknowledgment)
 
@@ -30,7 +32,7 @@ As it is imperative for clients to maintain the regularity of their payments, AR
 applying for an insurance plan by means of assessing their financial constraints. The obtained information then displays the most optimum policy 
 recommendations aligned with the client's needs and capacity.
 
-  ###  :clipboard: Objectives
+  ###  :dart: Objectives
   This program was materialized as a means to fulfill the following objectives:
   - Promote quality treatment and services to the disadvantaged and vulnerable members of society
   - Provide protection against large, unprecedented risks and accidental losses
@@ -40,50 +42,45 @@ recommendations aligned with the client's needs and capacity.
 
   ### :seedling: Sustainable Development Goals (SDGs)
   In compliance with the United Nations' (UN) 2030 agenda for sustainable development, I built my program around the pursuits of the following goals:
-  - **SDG 1: No Poverty** - The primary purpose of ARKA is to supply financial benefits to individuals for unanticipated circumstances (e.g., accidents and
-  medical emergencies) where budgetary liabilities are high. It prevents families from falling into debt and impoverished conditions when their net income
-  fails to suffice for medical charges.
-  - **SDG 3: Good Health and Well-being** - ARKA's benefits largely revolve around medical plights as it aims to help with the preservation of life by means of
-  financial compensation. Access to healthcare is also thereby championed while providing hospitalization, home recovery, and palliative care benefits for the
-  policyholder, and in some casses, even cancer booster benefits for critical complications.
-  - **SDG 8: Decent Work and Economic Growth** - The implementation of ARKA will create new employment opportunities for insurance agents, as well as system and
-  database administrators responsible for regular program maintenance and optimization. By offering fair wages and a supportive working environment, ARKA will
-  enhance career productivity, contributing to a more stable and progressive economy.
-  - **SDG 10 - Reduced Inequalities** - By virtue of ARKA's structured and all-inclusive policies, families from all sorts of backgrounds and social footing are
-  given a selection of lifetime plans without much discrepancies in financial security and healthcare access between coverages. This ensures that all of our
-  policyholders are well protected and tended to regardless of their chosen insurance policy.
-
+  
+  | Sustainable Development Goals (SDG) | Significance 
+  |-------------------------------------|--------------|
+  | **SDG 1: No Poverty** | The primary purpose of ARKA is to supply financial benefits to individuals for unanticipated circumstances (e.g., accidents and medical emergencies) where budgetary liabilities are high. It prevents families from falling into debt and        impoverished conditions when their net income fails to suffice for medical charges.
+  | **SDG 3: Good Health and Well-being** | ARKA's benefits largely revolve around medical plights as it aims to help with the preservation of life by means of financial compensation. Access to healthcare is also thereby championed while providing hospitalization,      home recovery, and palliative care benefits for the policyholder, and in some casses, even cancer booster benefits for critical complications.
+  | **SDG 8: Decent Work and Economic Growth** | The implementation of ARKA will create new employment opportunities for insurance agents, as well as system and database administrators responsible for regular program maintenance and optimization. By offering fair       wages and a supportive working environment, ARKA will enhance career productivity, contributing to a more stable and progressive economy.
+  | **SDG 10 - Reduced Inequalities** | By virtue of ARKA's structured and all-inclusive policies, families from all sorts of backgrounds and social footing are given a selection of lifetime plans without much discrepancies in financial security and healthcare access   between coverages. This ensures that all of our policyholders are well protected and tended to regardless of their chosen insurance policy.
+  
 ##  :hammer_and_wrench: Project Development
-Add a detailed introduction about the project here, everything you want the reader to know.
+ARKA: Arangkada Life Insurance is an insurance management system developed using **Java (JDK 8)** and integrated with a **MySQL server** for efficient database management. The project employed **Apache Maven**, 
+a versatile build automation tool, to streamline source code compilation, manage dependencies, package binary artifacts, and facilitate the execution of test scripts, ensuring a smooth and reliable development 
+process. Furthermore, the development environment for this project was **Visual Studio Code**, owing to its extensive plugin ecosystem and excellent support for Java development.
 
-  ###  :memo: Program Features
-  In ARKA, the features are well thought of to endorse ease of navigation and general convenience for the agents who are expected to operate the program. 
-  Listed below are the functionalities of the program:
-  - **Main Menu Navigation System**
-  - **Agent Menu System**
-    - Display, add, remove, search, and update methods
-  - **User Management**
-    - Sign up, sign in, and log out methods
-    - Unique and random ID generation for agents, clients, policies, and payments
-  - **Agent Management**
-  - **Client Management**
-  - **Policy Management**
-  - **Payment Management**
-  - **Input and Data Validation**
-  - **Arithmetic Computations**
-  - **Logical Computations**
-  - **Database Management System (MySQL)**
-    - Database Connection
-    - Data Storage
-    - CRUD (Create, Read, Update, and Delete) Operations
-  - **Formatted Console**
-  - **Exception Handling**
+  ###  :clipboard: Prerequisites
+  - **Code Editor or IDE** (e.g., Visual Studio Code)
+  - **Java Development Kit (JDK)**
+  - **MySQL Database**
+    - Update the JDBC URL, username, and password in ```ArkaDatabase``` according to your credentials.
+  - **MySQL Connector**
+    - Download and install the MySQL JDBC Driver from the official [MySQL Community Downloads](https://dev.mysql.com/downloads/connector/j/).
+  - **Apache Maven**
+  - **Project Directory**
+    - Observe proper [file structuring](#file_folder-file-structure) to avoid program errors.
 
-  ###  :hammer: Build
-    If you want other people to contribute to this project, this is the section, make sure you always add this.
+  ### :hammer: Build Instructions
+  1. **Open the project folder.** Download the .zip file of the project and extract it to your desired folder. Navigate to the project root where ```src``` is located.
+  2. **Compile the program.** 
+
+  ```
+  javac -d out -cp lib/mysql-connector-java-9.1.0.jar $(find src -name "*.java")
+  ```
+
+  3. **Run the program.** Following successful compilation, run the program using the command below:
+
+  ```
+  java -cp out:lib/mysql-connector-java-9.1.0.jar main.Main
+  ```
   
   ###  :file_folder: File Structure
-  Add a file structure here with the basic details about files, below is an example.
   
   ```
   ├── src
@@ -117,6 +114,30 @@ Add a detailed introduction about the project here, everything you want the read
   │   └── utils
   │       └── ArkaCustom.java
   ```
+
+  ###  :memo: Program Features
+  In ARKA, the features are well thought of to endorse ease of navigation and general convenience for the agents who are expected to operate the program. 
+  Listed below are the functionalities of the program:
+  - **Main Menu Navigation System**
+  - **Agent Menu System**
+    - Display, add, remove, search, and update methods
+  - **User Management**
+    - Sign up, sign in, and log out methods
+    - Unique and random ID generation for agents, clients, policies, and payments
+  - **Agent Management**
+  - **Client Management**
+  - **Policy Management**
+  - **Payment Management**
+  - **Input and Data Validation**
+  - **Arithmetic Computations**
+  - **Logical Computations**
+  - **Database Management System (MySQL)**
+    - Database Connection
+    - Data Storage
+    - CRUD (Create, Read, Update, and Delete) Operations
+  - **Formatted Console**
+  - **Exception Handling**
+
   ###  :bookmark: Classes
   
   | No | Class Name | Purpose 
@@ -263,6 +284,15 @@ as a class.
   
   By virtue of abstraction, **code reusability and scalability** are supported accross the entire inheritance hierarchy and a uniform structure is observed in the program instructions (especially in 
   ```ArkaPolicy``` and its derived classes), allowing ease of management, optimized code organization, and reduced method duplications that could compromise the quality of the program.
+
+## :hourglass_flowing_sand: Future Prospects
+The following are the future checkpoints after ARKA's initial deployment:
+
+| No | Future Prospects | Purpose
+|----|------------------|---------|
+| 1  | **UI/UX Integration** | Create a user interface (UI) design for enhanced user-program interactions and ease of navigation
+| 2  | **Web-based Platform Expansion** | Integrate a web-based platform to secure access to more upscaled features (e.g., profile creation, file uploading, etc.,)
+| 3  | **Mobile Application Expansion** | Develop a mobile application of ARKA to encourage user engagement and increase general convenience
 
 ## :cherry_blossom: About the Developer
 Hi! I am **Aila Roshiele C. Donayre**, the program developer and initiator behind ARKA: Arangkada Life Insurance. This is my first time fiddling with Java as a novice programmer, as the only 
