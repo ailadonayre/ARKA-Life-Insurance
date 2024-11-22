@@ -40,11 +40,18 @@ recommendations aligned with the client's needs and capacity.
 
   ### :seedling: Sustainable Development Goals (SDGs)
   In compliance with the United Nations' (UN) 2030 agenda for sustainable development, I built my program around the pursuits of the following goals:
-  - <b>SDG 1: No Poverty</b> - description
-  - <b>SDG 3: Good Health and Well-being</b> - description
-  - <b>SDG 8: Decent Work and Economic Growth</b> - description
-  - <b>SDG 9: Industry, Innovation, and Infrastructure</b> - description
-  - <b>SDG 11: Sustainable Cities and Communities</b> - description
+  - **SDG 1: No Poverty** - The primary purpose of ARKA is to supply financial benefits to individuals for unanticipated circumstances (e.g., accidents and
+  medical emergencies) where budgetary liabilities are high. It prevents families from falling into debt and impoverished conditions when their net income
+  fails to suffice for medical charges.
+  - **SDG 3: Good Health and Well-being** - ARKA's benefits largely revolve around medical plights as it aims to help with the preservation of life by means of
+  financial compensation. Access to healthcare is also thereby championed while providing hospitalization, home recovery, and palliative care benefits for the
+  policyholder, and in some casses, even cancer booster benefits for critical complications.
+  - **SDG 8: Decent Work and Economic Growth** - The implementation of ARKA will create new employment opportunities for insurance agents, as well as system and
+  database administrators responsible for regular program maintenance and optimization. By offering fair wages and a supportive working environment, ARKA will
+  enhance career productivity, contributing to a more stable and progressive economy.
+  - **SDG 10 - Reduced Inequalities** - By virtue of ARKA's structured and all-inclusive policies, families from all sorts of backgrounds and social footing are
+  given a selection of lifetime plans without much discrepancies in financial security and healthcare access between coverages. This ensures that all of our
+  policyholders are well protected and tended to regardless of their chosen insurance policy.
 
 ##  :hammer_and_wrench: Project Development
 Add a detailed introduction about the project here, everything you want the reader to know.
@@ -52,24 +59,25 @@ Add a detailed introduction about the project here, everything you want the read
   ###  :memo: Program Features
   In ARKA, the features are well thought of to endorse ease of navigation and general convenience for the agents who are expected to operate the program. 
   Listed below are the functionalities of the program:
-  - Menu System
+  - **Main Menu Navigation System**
+  - **Agent Menu System**
     - Display, add, remove, search, and update methods
-  - User Management
+  - **User Management**
     - Sign up, sign in, and log out methods
     - Unique and random ID generation for agents, clients, policies, and payments
-  - Agent Management
-  - Client Management
-  - Policy Management
-  - Payment Management
-  - Input and Data Validation
-  - Arithmetic Computations
-  - Logical Computations
-  - Database Management System (MySQL)
+  - **Agent Management**
+  - **Client Management**
+  - **Policy Management**
+  - **Payment Management**
+  - **Input and Data Validation**
+  - **Arithmetic Computations**
+  - **Logical Computations**
+  - **Database Management System (MySQL)**
     - Database Connection
     - Data Storage
-    - CRUD Operations
-  - Formatted Console
-  - Exception Handling
+    - CRUD (Create, Read, Update, and Delete) Operations
+  - **Formatted Console**
+  - **Exception Handling**
 
   ###  :hammer: Build
     If you want other people to contribute to this project, this is the section, make sure you always add this.
@@ -113,26 +121,26 @@ Add a detailed introduction about the project here, everything you want the read
   
   | No | Class Name | Purpose 
   |----|------------|-------|
-  | 1  | Main | Entry point
-  | 2  | ArkaDatabase | Contains the database connection and direct manipulation of tables
-  | 3  | ArkaCustom | Separate class for console formatting
-  | 4  | ArkaAgent | Includes the attributes of agent
-  | 5  | ArkaAgentManager | Contains the methods for signing up and signing in
-  | 6  | ArkaClient | Includes the attributes of client
-  | 7  | ArkaClientManager | Composed of all the methods in correlation with client
-  | 8  | ArkaPolicy | Abstract class containing the shared attributes of the policies
-  | 9  | ArkaGintoPlan | Contains information about the Ginto Plan; a concrete subclass of ```ArkaPolicy```
-  | 10  | ArkaPilakPlan | Contains information about the Pilak Plan; a concrete subclass of ```ArkaPolicy```
-  | 11  | ArkaTansoPlan | Contains information about the Tanso Plan; a concrete subclass of ```ArkaPolicy```
-  | 12  | ArkaManagerApp | Initial menu (sign up and sign in)
-  | 13  | ArkaMenu | Agent menu (menu navigation for the main functionalities)
-  | 14  | ArkaClientInput | Encompasses the inputs of the client's biodata
-  | 15  | ArkaEligibility | Includes the calculation of client's eligibility score and financial validation
-  | 16  | ArkaPolicyRecommender | Obtains data from ```ArkaEligibility``` to form policy recommendations
-  | 17  | ArkaBeneficiary | Collects the beneficiary details of the client
-  | 18  | ArkaStatement | Composes the proposal statement of the client
-  | 19  | ArkaPayment | Processes the insurance payment of the client
-  | 20  | ArkaUpdatePayment | Updates the client's insurance statement upon validating the next payment date
+  | 1  | **Main** | Entry point
+  | 2  | **ArkaDatabase** | Contains the database connection and direct manipulation of tables
+  | 3  | **ArkaCustom** | Separate class for console formatting
+  | 4  | **ArkaAgent** | Includes the attributes of agent
+  | 5  | **ArkaAgentManager** | Contains the methods for signing up and signing in
+  | 6  | **ArkaClient** | Includes the attributes of client
+  | 7  | **ArkaClientManager** | Composed of all the methods in correlation with client
+  | 8  | **ArkaPolicy** | Abstract class containing the shared attributes of the policies
+  | 9  | **ArkaGintoPlan** | Contains information about the Ginto Plan; a concrete subclass of ```ArkaPolicy```
+  | 10  | **ArkaPilakPlan** | Contains information about the Pilak Plan; a concrete subclass of ```ArkaPolicy```
+  | 11  | **ArkaTansoPlan** | Contains information about the Tanso Plan; a concrete subclass of ```ArkaPolicy```
+  | 12  | **ArkaManagerApp** | Initial menu (sign up and sign in)
+  | 13  | **ArkaMenu** | Agent menu (menu navigation for the main functionalities)
+  | 14  | **ArkaClientInput** | Encompasses the inputs of the client's biodata
+  | 15  | **ArkaEligibility** | Includes the calculation of client's eligibility score and financial validation
+  | 16  | **ArkaPolicyRecommender** | Obtains data from ```ArkaEligibility``` to form policy recommendations
+  | 17  | **ArkaBeneficiary** | Collects the beneficiary details of the client
+  | 18  | **ArkaStatement** | Composes the proposal statement of the client
+  | 19  | **ArkaPayment** | Processes the insurance payment of the client
+  | 20  | **ArkaUpdatePayment** | Updates the client's insurance statement upon validating the next payment date
   
 ##  :wrench: Object-Oriented Programming Principles
 Object-oriented programming is one of the programming paradigms that is distinguished by objects and classes. It implements principles such as 
@@ -143,7 +151,7 @@ as a class.
   Encapsulation is one of the core principles in object-oriented programming as it the categorization of similar attributes into a class; it is essentially the
   foundation of OOP. Through access modifiers (```public, private,``` and ```protected```), the accessibility of certain fields within a class is explicitly defined.
   <br/><br/>
-  In **```ArkaClient```**, the data members like ```clientID``` and ```fistName``` are set to ```protected``` so as to restrict its reachability to only methods within the
+  In ```ArkaClient```, the data members like ```clientID``` and ```fistName``` are set to ```protected``` so as to restrict its reachability to only methods within the
   the said class, the same package, or in the inheritance hierarchy. 
 
   ```
@@ -154,7 +162,7 @@ as a class.
   ```
 
   However, there are some instances wherein these attributes must be called from a different package or class,  whereof it surpasses the set access modifier. In this regard, 
-  getter and setter methods were used to allow controlled access to the protected fields in **```ArkaClient```**. 
+  getter and setter methods were used to allow controlled access to the protected fields in ```ArkaClient```. 
 
   ```
   public String getClientID() {
@@ -171,7 +179,7 @@ as a class.
   By virtue of this, **data integrity and security** is ultimately preserved in the program and confidential information are not susceptible to unwarranted manipulation.
   
   ###  :envelope_with_arrow: Inheritance
-  In OOP, inheritance refers to the authority given to a derived class to inherit the data members and methods from a base class or parent class. This principle allows for 
+  In OOP, inheritance refers to the authority given to a derived class to inherit the data members and methods of a base class or parent class. This principle allows for 
   **code reusability, effective polymorphism,** and **program organization** without tradeoffs in the quality of code composition.
 
   ```
@@ -185,26 +193,76 @@ as a class.
   public class ArkaGintoPlan extends ArkaPolicy {
   ```
 
-  **```ArkaPolicy```** encompasses attributes such as ```policyID```, ```premiumAmount```, and ```paymentPeriod```, and methods like ```getPlanName()```, ```getCoverageAmount()```,
-  ```getPremiumAmount()```, and ```displayPlan()``` which are all inherited and referenced in its derived classes. In this manner, data redundancy is reduced and common behaviors are definitively 
-  reused in the inheritance hierarchy. 
+  ```ArkaPolicy``` encompasses attributes such as ```policyID```, ```premiumAmount```, and ```paymentPeriod```, and methods like ```getPlanName()```, ```getCoverageAmount()```,
+  ```getPremiumAmount()```, and ```displayPlan()``` which are all inherited and referenced in its derived classes. In this manner, data redundancy is reduced and common behaviors 
+  are definitively reused in the inheritance hierarchy. 
   <br/><br/>
-  Moreover, certain methods (e.g., ```displayPlan()```) can perform distinctively in accordance with its method definition in the derived classes – which is, in essence, another object-oriented 
-  programming principle in play called polymorphism.
+  Moreover, certain methods (e.g., ```displayPlan()```) can perform distinctively in accordance with its method definition in the derived classes – which is, in essence, another 
+  object-oriented programming principle in play called polymorphism.
   
   ###  :card_index_dividers: Polymorphism
-  Write about setting up the working environment for your project.
-  - How to download the project...
-  - How to install dependencies...
+  The fourth OOP principle, polymorphism, enables methods to act in line with the object performing the function call. The characteristics of this principle allows for more 
+  **dynamic and context-specific functions** that modify its behavior based on the runtime type of the object that invokes the method.
+  <br/><br/>
+  In ```ArkaPolicy```, there are several methods that were passed on to its subclasses with each implementation providing functionality specific to the derived class. 
+  ```displayPlan()``` is one of the methods declared in the said class and consequently defined uniquely in the other policy classes. When creating an instance of ```ArkaGintoPlan``` 
+  and calling ```displayPlan()``` from it, only the implementation defined in the ```ArkaGintoPlan``` class will execute. The method defined in ArkaPolicy is overridden in the 
+  ```ArkaGintoPlan``` class, so the overridden version in ```ArkaGintoPlan``` takes precedence.
+
+  ```
+  // ArkaGintoPlan
+  public void displayPlan() {
+        System.out.println("Ginto Plan");
+  ```
+
+  ```
+  // ArkaPilakPlan
+  public void displayPlan() {
+        System.out.println("Pilak Plan");
+  ```
+
+  ```
+  // ArkaTansoPlan
+  public void displayPlan() {
+        System.out.println("Tanso Plan");
+  ```
+
+  ```
+  ArkaPolicy ginto = new ArkaGintoPlan();
+  ginto.displayPlan();
+  ```
+
+  Thus, if I were to call ```ginto.displayPlan()``` (assuming that ```ginto``` is an instance of the class ```ArkaGintoPlan```), only "Ginto Plan" will be displayed. This is because the 
+  ```displayPlan()``` method in ```ArkaGintoPlan``` overrides the one in ```ArkaPolicy```. The methods in ```ArkaPilakPlan``` and ```ArkaTansoPlan``` are entirely irrelevant to this object 
+  since they belong to other subclasses and are not part of the ```ginto``` instance.
   
   ###  :key: Abstraction
-  Write about setting up the working environment for your project.
-  - How to download the project...
-  - How to install dependencies...
+  Abstraction refers to the practice of exposing only the necessary functionality to the user while hiding implementation particulars of a program. Through the definition of ```ArkaPolicy``` as an 
+  abstract class, it ensures that its common attributes are shared across all of its derived classes. 
   
   ```
   public abstract class ArkaPolicy {
   ```
+
+  Since ```ArkaGintoPlan```, ```ArkaPilakPlan```, and ```ArkaTansoPlan``` are concrete subclasses of abstract super class ```ArkaPolicy```, the abstract methods defined in the latter must also be 
+  implemented in its subclasses. This explains the mutual presence of ```getPlanName()```, ```getCoverageAmount()```, ```getPremiumAmount()```, and ```displayPlan()``` in all the derived classes that 
+  extends from ```ArkaPolicy```. Although the aforementioned methods were defined in ```ArkaPolicy```, they were not implemented in the said class due to its ```abstract``` class configuration. Thus, it 
+  is the concrete subclasses' position to provide the implementation of those methods.
+  
+  ```
+  @Override
+  public String getPlanName() {
+        return "Ginto Plan";
+  }
+
+  @Override
+  public int getCoverageAmount() {
+        return 3000000;
+  }
+  ```
+  
+  By virtue of abstraction, **code reusability and scalability** are supported accross the entire inheritance hierarchy and a uniform structure is observed in the program instructions (especially in 
+  ```ArkaPolicy``` and its derived classes), allowing ease of management, optimized code organization, and reduced method duplications that could compromise the quality of the program.
 
 ## :cherry_blossom: About the Developer
 Hi! I am **Aila Roshiele C. Donayre**, the program developer and initiator behind ARKA: Arangkada Life Insurance. This is my first time fiddling with Java as a novice programmer, as the only 
