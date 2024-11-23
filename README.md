@@ -36,7 +36,6 @@ recommendations aligned with the client's needs and capacity.
 
 <br/>
 <img src="images/ARKA Policies.jpg" alt="ARKA Arangkada Life Insurance Policies">
-<br/>
 
   ###  :dart: Objectives
   This program was materialized as a means to fulfill the following objectives:
