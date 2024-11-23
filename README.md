@@ -34,6 +34,8 @@ As it is imperative for clients to maintain the regularity of their payments, AR
 applying for an insurance plan by means of assessing their financial constraints. The obtained information then displays the most optimum policy 
 recommendations aligned with the client's needs and capacity.
 
+<img src="images/ARKA Policies.jpg" alt="ARKA Arangkada Life Insurance Policies">
+
   ###  :dart: Objectives
   This program was materialized as a means to fulfill the following objectives:
   - Promote quality treatment and services to the disadvantaged and vulnerable members of society
