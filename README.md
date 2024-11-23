@@ -34,7 +34,6 @@ As it is imperative for clients to maintain the regularity of their payments, AR
 applying for an insurance plan by means of assessing their financial constraints. The obtained information then displays the most optimum policy 
 recommendations aligned with the client's needs and capacity.
 
-<br/>
 <img src="images/ARKA Policies.jpg" alt="ARKA Arangkada Life Insurance Policies">
 
   ###  :dart: Objectives
@@ -300,6 +299,9 @@ The following are the future checkpoints after ARKA's initial deployment:
 | 3  | **Mobile Application Expansion** | Develop a mobile application of ARKA to encourage user engagement and increase general convenience
 
 ## :cherry_blossom: About the Developer
+
+<img src="images/ARKA Developer.jpg" alt="ARKA Arangkada Life Insurance Developer">
+
 Hi! I am **Aila Roshiele C. Donayre**, the program developer and initiator behind ARKA: Arangkada Life Insurance. This is my first time fiddling with Java as a novice programmer, as the only 
 programming languages that I have ever got my hands on were C++, and Python. ARKA holds a special place in my heart for it is one of my first individual projects and is definitely something that 
 I will remember in retrospect as one of my starter programs. 
