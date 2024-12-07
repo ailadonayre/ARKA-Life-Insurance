@@ -48,7 +48,7 @@ public class ArkaPayment {
 
     public void settlePayment() {
         String checkPolicySQL = "SELECT COUNT(*) FROM policy WHERE policyID = ?";
-        try (Connection conn = database.ArkaDatabase.getConnection();
+        try (Connection conn = db.ArkaDatabase.getConnection();
              PreparedStatement checkStatement = conn.prepareStatement(checkPolicySQL)) {
 
             checkStatement.setString(1, this.policyID);
