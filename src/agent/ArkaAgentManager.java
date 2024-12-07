@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import database.ArkaDatabase;
+import db.ArkaDatabase;
 import utils.ArkaCustom;
 
 public class ArkaAgentManager {

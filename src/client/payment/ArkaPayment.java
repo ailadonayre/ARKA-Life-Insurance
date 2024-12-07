@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import client.ArkaClient;
 import client.ArkaClientManager;
-import database.ArkaDatabase;
+import db.ArkaDatabase;
 import models.ArkaPolicy;
 import utils.ArkaCustom;
 

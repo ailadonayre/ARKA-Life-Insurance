@@ -13,7 +13,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
-import database.ArkaDatabase;
+import db.ArkaDatabase;
 import manager.ArkaMenu;
 import utils.ArkaCustom;
 
