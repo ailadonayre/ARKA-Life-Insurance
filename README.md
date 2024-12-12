@@ -173,7 +173,7 @@ Object-oriented programming is one of the programming paradigms that is distingu
 as a class.
 
   ### :lock_with_ink_pen: Encapsulation
-  Encapsulation is one of the core principles in object-oriented programming as it the categorization of similar attributes into a class; it is essentially the
+  Encapsulation is one of the core principles in object-oriented programming as it is the categorization of similar attributes into a class; it is essentially the
   foundation of OOP. Through access modifiers (```public, private,``` and ```protected```), the accessibility of certain fields within a class is explicitly defined.
   <br/><br/>
   In ```ArkaClient```, the data members like ```clientID``` and ```fistName``` are set to ```protected``` so as to restrict its reachability to only methods within the
