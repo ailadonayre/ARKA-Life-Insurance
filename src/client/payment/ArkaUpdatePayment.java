@@ -30,20 +30,20 @@ public class ArkaUpdatePayment {
                 if (client == null) {
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Client not found for Client ID: " + clientID);
-                    continue;
+                    return;
                 }
 
                 if (!client.getAgentID().equals(agentID)) {
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("You do not have access to this client's information.");
-                    continue;
+                    return;
                 }
 
                 policyID = database.getPolicyID(clientID);
                 if (policyID == null) {
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("No policy found for Client ID: " + clientID);
-                    continue;
+                    return;
                 }
 
                 break;

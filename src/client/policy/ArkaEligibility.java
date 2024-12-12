@@ -15,7 +15,7 @@ public class ArkaEligibility {
 
     public void checkEligibility(ArkaClient client) {
         System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
-        System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Check for Client Eligibility" + ArkaCustom.ANSI_RESET);
+        System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Client Eligibility" + ArkaCustom.ANSI_RESET);
         System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
         System.out.println("Checking eligibility for client: " + client.getFirstName() + " " + client.getLastName());
 

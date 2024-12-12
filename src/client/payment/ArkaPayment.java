@@ -125,13 +125,13 @@ public class ArkaPayment {
             System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Payment " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Receipt" + ArkaCustom.ANSI_RESET);
 
-            System.out.println("\nClient: " + formattedName);
-            System.out.println("Payment Date: " + paymentDate);
-            System.out.println("Policy ID: " + policyID);
-            System.out.println("Amount Paid: Php " + formattedAmount);
-            System.out.println("Payment ID: " + paymentID);
-            System.out.println("Next Payment: " + (nextPayment != null ? nextPayment : "N/A"));
-            System.out.println("Last Payment: " + lastPayment);
+            System.out.println(ArkaCustom.ANSI_BOLD + "\nClient: " + ArkaCustom.ANSI_RESET + formattedName);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Payment Date: " + ArkaCustom.ANSI_RESET + paymentDate);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Policy ID: " + ArkaCustom.ANSI_RESET + policyID);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Amount Paid: " + ArkaCustom.ANSI_RESET + "Php " + formattedAmount);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Payment ID: " + ArkaCustom.ANSI_RESET + paymentID);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Next Payment: " + ArkaCustom.ANSI_RESET + (nextPayment != null ? nextPayment : "N/A"));
+            System.out.println(ArkaCustom.ANSI_BOLD + "Last Payment: " + ArkaCustom.ANSI_RESET + lastPayment);
         } else {
             System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Error: Client not found.");

@@ -307,12 +307,12 @@ public class ArkaClientManager extends ArkaClient {
                     System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
                     System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Policy " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
 
-                    System.out.println("\nPolicy Type: " + policyType);
-                    System.out.println("Start Date: " + startDate);
-                    System.out.println("End Date: " + endDate);
-                    System.out.println("Premium Period: " + paymentPeriod + " years");
-                    System.out.println("Premium Amount: Php " + formattedPremiumAmount);
-                    System.out.println("Coverage Amount: Php " + formattedCoverageAmount);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "\nPolicy Type: " + ArkaCustom.ANSI_RESET + policyType);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Start Date: " + ArkaCustom.ANSI_RESET + startDate);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "End Date: " + ArkaCustom.ANSI_RESET + endDate);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Premium Period: " + ArkaCustom.ANSI_RESET + paymentPeriod + " years");
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Premium Amount: " + ArkaCustom.ANSI_RESET + "Php " + formattedPremiumAmount);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Coverage Amount: " + ArkaCustom.ANSI_RESET + "Php " + formattedCoverageAmount);
                 }
             }
     
@@ -335,9 +335,9 @@ public class ArkaClientManager extends ArkaClient {
                     System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
                     System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Payment " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
 
-                    System.out.println("\nLast Payment Date: " + paymentDate);
-                    System.out.println("Next Payment Date: " + nextPayment);
-                    System.out.println("Last Date of Insurance Payment: " + lastPayment);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "\nLast Payment Date: " + ArkaCustom.ANSI_RESET + paymentDate);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Next Payment Date: " + ArkaCustom.ANSI_RESET + nextPayment);
+                    System.out.println(ArkaCustom.ANSI_BOLD + "Last Date of Insurance Payment: " + ArkaCustom.ANSI_RESET + lastPayment);
 
                     System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------" + ArkaCustom.ANSI_RESET);
                 } else {
@@ -507,7 +507,7 @@ public class ArkaClientManager extends ArkaClient {
             for (ArkaClient client : clients) {
                 String formattedName = String.format("%s %s %c. %s", client.honorific, client.firstName,
                         client.middleName.isEmpty() ? ' ' : client.middleName.charAt(0), client.lastName);
-                System.out.printf("%d. %s %s", index++, client.clientID, formattedName);
+                System.out.printf("%d. " + ArkaCustom.ANSI_BOLD + "%s " + ArkaCustom.ANSI_RESET + "%s", index++, client.clientID, formattedName);
                 System.out.println();
             }
         }
@@ -531,12 +531,12 @@ public class ArkaClientManager extends ArkaClient {
             System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Client " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Information" + ArkaCustom.ANSI_RESET);
 
-            System.out.println("\nClient ID: " + client.getClientID());
-            System.out.println("Name: " + client.getHonorific() + " " + client.getFirstName() + " " + 
+            System.out.println(ArkaCustom.ANSI_BOLD + "\nClient ID: " + ArkaCustom.ANSI_RESET + client.getClientID());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Name: " + ArkaCustom.ANSI_RESET + client.getHonorific() + " " + client.getFirstName() + " " + 
                                client.getMiddleName().charAt(0) + ". " + client.getLastName());
-            System.out.println("Date of Birth: " + client.getDateOfBirth());
-            System.out.println("Contact Number: " + client.getContactNumber());
-            System.out.println("Email: " + client.getEmailAddress());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Date of Birth: " + ArkaCustom.ANSI_RESET + client.getDateOfBirth());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Contact Number: " + ArkaCustom.ANSI_RESET + client.getContactNumber());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Email: " + ArkaCustom.ANSI_RESET + client.getEmailAddress());
     
             printPolicyDetails(clientID);
         } else {

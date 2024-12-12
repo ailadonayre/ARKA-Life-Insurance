@@ -38,21 +38,21 @@ public class ArkaStatement {
             System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Proposal " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Statement" + ArkaCustom.ANSI_RESET);
 
-            System.out.println("\nOn the Life of: " + client.getFullName());
-            System.out.println("Age: " + calculateAge(client.getDateOfBirth()));
-            System.out.println("Chosen Insurance Plan: " + chosenPolicy.getPlanName());
-            System.out.println("Payment Period: " + paymentPeriod + " years");
+            System.out.println(ArkaCustom.ANSI_BOLD + "\nOn the Life of: " + ArkaCustom.ANSI_RESET + client.getFullName());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Age: " + ArkaCustom.ANSI_RESET + calculateAge(client.getDateOfBirth()));
+            System.out.println(ArkaCustom.ANSI_BOLD + "Chosen Insurance Plan: " + ArkaCustom.ANSI_RESET + chosenPolicy.getPlanName());
+            System.out.println(ArkaCustom.ANSI_BOLD + "Payment Period: " + ArkaCustom.ANSI_RESET + paymentPeriod + " years");
 
             DecimalFormat df = new DecimalFormat("#.00");
             String formattedCoverageAmount = df.format(chosenPolicy.getCoverageAmount());
-            System.out.println("Coverage Amount: Php " + formattedCoverageAmount);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Coverage Amount: " + ArkaCustom.ANSI_RESET + "Php " + formattedCoverageAmount);
 
             double expectedPremium = chosenPolicy.getPremiumAmount(paymentPeriod);
 
             String formattedPremiumAmount = df.format(expectedPremium);
-            System.out.println("Premium Amount: Php " + formattedPremiumAmount);
+            System.out.println(ArkaCustom.ANSI_BOLD + "Premium Amount: " + ArkaCustom.ANSI_RESET + "Php " + formattedPremiumAmount);
 
-            System.out.println("Beneficiary: " + beneficiaryName + " (" + relationship + ")");
+            System.out.println(ArkaCustom.ANSI_BOLD + "Beneficiary: " + ArkaCustom.ANSI_RESET + beneficiaryName + " (" + relationship + ")");
 
             System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Payment Information" + ArkaCustom.ANSI_RESET);
@@ -71,6 +71,7 @@ public class ArkaStatement {
                 } else {
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Error: The payment amount must be exactly Php " + expectedPremium + ".00 for the chosen payment period.");
+                    continue;
                 }
             }            
 
