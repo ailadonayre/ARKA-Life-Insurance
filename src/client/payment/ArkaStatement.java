@@ -56,16 +56,16 @@ public class ArkaStatement {
 
             System.out.println(ArkaCustom.ANSI_BOLD + "\n------------------------------------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "ARKA: " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Payment Information" + ArkaCustom.ANSI_RESET);
-            
+
             double paymentAmount = 0.0;
 
             while (true) {
                 System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + "\n> " + ArkaCustom.ANSI_RESET);
                 System.out.print("Enter payment amount (exact amount): ");
-                
+
                 paymentAmount = scanner.nextDouble();
                 scanner.nextLine();
-                
+
                 if (paymentAmount == expectedPremium) {
                     break;
                 } else {
@@ -76,20 +76,22 @@ public class ArkaStatement {
             }            
 
             String paymentFrequency = "Annually";
-    
+
             LocalDate startDate = LocalDate.now();
-    
+
             LocalDate birthDate = client.getDateOfBirth();
             LocalDate endDate = birthDate.plusYears(101).minusDays(1);
-    
+
             Set<String> existingPolicyIDs = getExistingPolicyIDs();
-    
+
             String policyID = clientManager.generatePolicyID(existingPolicyIDs);
-    
-            savePolicyDetails(policyID, client.getClientID(), chosenPolicy, startDate, endDate, paymentAmount, paymentPeriod, paymentFrequency, "ACTIVE", beneficiaryName, relationship);
-    
-            ArkaPayment.collectAndProcessPayment(scanner, client, chosenPolicy, paymentAmount, paymentFrequency, paymentPeriod);
-    
+
+            String loggedInAgentID = clientManager.getLoggedInAgentID();
+
+            savePolicyDetails(policyID, client.getClientID(), loggedInAgentID, chosenPolicy, startDate, endDate, paymentAmount, paymentPeriod, paymentFrequency, "ACTIVE", beneficiaryName, relationship);
+
+            ArkaPayment.collectAndProcessPayment(scanner, client, loggedInAgentID, chosenPolicy, paymentAmount, paymentFrequency, paymentPeriod);
+
         } catch (Exception e) {
             System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("An error occurred while generating the statement: " + e.getMessage());
@@ -97,26 +99,26 @@ public class ArkaStatement {
         }
     }              
 
-    private void savePolicyDetails(String policyID, String clientID, ArkaPolicy chosenPolicy, LocalDate startDate, LocalDate endDate, double premium, int paymentPeriod, String paymentFrequency, String status, String beneficiaryName, String beneficiaryRelationship) {
-        String sql = "INSERT INTO policy (policyID, clientID, policyType, startDate, endDate, premiumAmount, coverageAmount, paymentPeriod, paymentFrequency, status, beneficiaryName, beneficiaryRelationship) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private void savePolicyDetails(String policyID, String clientID, String agentID, ArkaPolicy chosenPolicy, LocalDate startDate, LocalDate endDate, double premium, int paymentPeriod, String paymentFrequency, String status, String beneficiaryName, String beneficiaryRelationship) {
+        String sql = "INSERT INTO policy (policyID, clientID, agentID, policyType, startDate, endDate, premiumAmount, coverageAmount, paymentPeriod, paymentFrequency, status, beneficiaryName, beneficiaryRelationship) "
+                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
         try (Connection conn = ArkaDatabase.getConnection();  
              PreparedStatement stmt = conn.prepareStatement(sql)) {
     
             stmt.setString(1, policyID);  
             stmt.setString(2, clientID);  
-            stmt.setString(3, chosenPolicy.getPlanName());
-            stmt.setObject(4, startDate);  
-            stmt.setObject(5, endDate);    
-            stmt.setDouble(6, premium);    
-            stmt.setDouble(7, chosenPolicy.getCoverageAmount());  
-            stmt.setInt(8, paymentPeriod); 
-            stmt.setString(9, paymentFrequency); 
-            stmt.setString(10, status); 
-            stmt.setString(11, beneficiaryName); 
-            stmt.setString(12, beneficiaryRelationship); 
-    
+            stmt.setString(3, agentID);
+            stmt.setString(4, chosenPolicy.getPlanName());
+            stmt.setObject(5, startDate);  
+            stmt.setObject(6, endDate);    
+            stmt.setDouble(7, premium);    
+            stmt.setDouble(8, chosenPolicy.getCoverageAmount());  
+            stmt.setInt(9, paymentPeriod); 
+            stmt.setString(10, paymentFrequency); 
+            stmt.setString(11, status); 
+            stmt.setString(12, beneficiaryName); 
+            stmt.setString(13, beneficiaryRelationship); 
             stmt.executeUpdate();
             System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
             System.out.println("Policy details saved successfully.");

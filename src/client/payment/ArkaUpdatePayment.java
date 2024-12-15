@@ -81,9 +81,10 @@ public class ArkaUpdatePayment {
 
                     double newPaymentAmount = promptForPaymentAmount(premiumAmount);
                     if (newPaymentAmount == -1) return;
-
+                    
                     String paymentFrequency = "Annually";
-                    ArkaPayment.collectAndProcessPayment(scanner, client, clientPolicy, newPaymentAmount, paymentFrequency, paymentPeriod);
+
+                    ArkaPayment.collectAndProcessPayment(scanner, client, agentID, clientPolicy, newPaymentAmount, paymentFrequency, paymentPeriod);
 
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Payment updated and processed successfully!");

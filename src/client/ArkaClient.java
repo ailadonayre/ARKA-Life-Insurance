@@ -35,11 +35,11 @@ public class ArkaClient {
     public ArkaClient() {
     }
 
-    public ArkaClient(String clientID, String lastName, String firstName, String middleName, String honorific,
+    public ArkaClient(String clientID, String agentID, String lastName, String firstName, String middleName, String honorific,
                   String sex, LocalDate dateOfBirth, String civilStatus, String placeOfBirth, String citizenship,
                   String nationality, String country, String province, String city, String barangay, String street,
                   String contactNumber, String emailAddress, String occupation, String companyName, int annualIncome,
-                  String sourceIncome, String agentID) {
+                  String sourceIncome) {
         if (clientID == null || clientID.isEmpty()) {
             throw new IllegalArgumentException("Client ID cannot be empty.");
         }

@@ -19,10 +19,12 @@ import utils.ArkaCustom;
 
 public class ArkaClientManager extends ArkaClient {
     private List<ArkaClient> clients;
+    private String loggedInAgentID;
 
     public ArkaClientManager() {
         super(
         "DEFAULT_CLIENT_ID",
+        "DEFAULT_AGENT_ID",
         "LastName",
         "FirstName",
         "",
@@ -43,8 +45,7 @@ public class ArkaClientManager extends ArkaClient {
         "Default Occupation",
         "Default Company Name",
         1,
-        "Default Income Source",
-        "DEFAULT_AGENT_ID"
+        "Default Income Source"
         );
         clients = new ArrayList<>();
     }
@@ -65,6 +66,8 @@ public class ArkaClientManager extends ArkaClient {
     }
 
     public void addClient(ArkaClient client, String loggedInAgentID) {
+        this.loggedInAgentID = loggedInAgentID;
+        
         try {
             if (clientExists(client.getEmailAddress(), client.getContactNumber())) {
                 System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
@@ -80,9 +83,8 @@ public class ArkaClientManager extends ArkaClient {
             return;
         }
 
-        String clientSql = "INSERT INTO client (clientID, lastName, firstName, middleName, honorific, sex, dateOfBirth, " +
-                        "civilStatus, placeOfBirth, contactNumber, emailAddress, occupation, companyName, agentID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+        String clientSql = "INSERT INTO client (clientID, agentID, lastName, firstName, middleName, honorific, sex, dateOfBirth, " +
+                        "civilStatus, placeOfBirth, contactNumber, emailAddress, occupation, companyName) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         String addressSql = "INSERT INTO address (clientID, country, province, city, barangay, street) VALUES (?, ?, ?, ?, ?, ?)";
         String citizenshipSql = "INSERT INTO citizenship (clientID, citizenship, nationality) VALUES (?, ?, ?)";
         String incomeSql = "INSERT INTO income (clientID, annualIncome, sourceIncome) VALUES (?, ?, ?)";
@@ -94,19 +96,19 @@ public class ArkaClientManager extends ArkaClient {
         try (Connection conn = ArkaDatabase.getConnection()) {
             try (PreparedStatement clientStatement = conn.prepareStatement(clientSql)) {
                 clientStatement.setString(1, client.clientID);
-                clientStatement.setString(2, client.lastName);
-                clientStatement.setString(3, client.firstName);
-                clientStatement.setString(4, client.middleName);
-                clientStatement.setString(5, client.honorific);
-                clientStatement.setString(6, client.sex);
-                clientStatement.setDate(7, java.sql.Date.valueOf(client.dateOfBirth));
-                clientStatement.setString(8, client.civilStatus);
-                clientStatement.setString(9, client.placeOfBirth);
-                clientStatement.setString(10, client.contactNumber);
-                clientStatement.setString(11, client.emailAddress);
-                clientStatement.setString(12, client.occupation);
-                clientStatement.setString(13, client.companyName);
-                clientStatement.setString(14, loggedInAgentID);
+                clientStatement.setString(2, loggedInAgentID);
+                clientStatement.setString(3, client.lastName);
+                clientStatement.setString(4, client.firstName);
+                clientStatement.setString(5, client.middleName);
+                clientStatement.setString(6, client.honorific);
+                clientStatement.setString(7, client.sex);
+                clientStatement.setDate(8, java.sql.Date.valueOf(client.dateOfBirth));
+                clientStatement.setString(9, client.civilStatus);
+                clientStatement.setString(10, client.placeOfBirth);
+                clientStatement.setString(11, client.contactNumber);
+                clientStatement.setString(12, client.emailAddress);
+                clientStatement.setString(13, client.occupation);
+                clientStatement.setString(14, client.companyName);
                 clientStatement.executeUpdate();
             }
 
@@ -359,7 +361,7 @@ public class ArkaClientManager extends ArkaClient {
 
     public List<ArkaClient> getAllClients() {
         List<ArkaClient> clients = new ArrayList<>();
-        String sql = "SELECT client.clientID, client.lastName, client.firstName, client.middleName, client.honorific, client.sex, " +
+        String sql = "SELECT client.clientID, client.agentID, client.lastName, client.firstName, client.middleName, client.honorific, client.sex, " +
                     "client.dateOfBirth, client.civilStatus, client.placeOfBirth, client.contactNumber, client.emailAddress, " +
                     "client.occupation, client.companyName, " +
                     "citizenship.citizenship, citizenship.nationality, " +
@@ -377,6 +379,7 @@ public class ArkaClientManager extends ArkaClient {
             while (resultSet.next()) {
                 ArkaClient client = new ArkaClient(
                     resultSet.getString("clientID"),
+                    resultSet.getString("agentID"),
                     resultSet.getString("lastName"),
                     resultSet.getString("firstName"),
                     resultSet.getString("middleName"),
@@ -397,8 +400,7 @@ public class ArkaClientManager extends ArkaClient {
                     resultSet.getString("occupation"),
                     resultSet.getString("companyName"),
                     resultSet.getInt("annualIncome"),
-                    resultSet.getString("sourceIncome"),
-                    resultSet.getString("agentID")
+                    resultSet.getString("sourceIncome")
                 );
                 clients.add(client);
             }
@@ -428,6 +430,7 @@ public class ArkaClientManager extends ArkaClient {
             if (rs.next()) {
                 client = new ArkaClient(
                     rs.getString("clientID"),
+                    rs.getString("agentID"),
                     rs.getString("lastName"),
                     rs.getString("firstName"),
                     rs.getString("middleName"),
@@ -448,8 +451,7 @@ public class ArkaClientManager extends ArkaClient {
                     rs.getString("occupation"),
                     rs.getString("companyName"),
                     rs.getInt("annualIncome"),
-                    rs.getString("sourceIncome"),
-                    rs.getString("agentID")
+                    rs.getString("sourceIncome")
                 );
 
                 client.setPolicyID(rs.getString("policyID"));
@@ -547,9 +549,9 @@ public class ArkaClientManager extends ArkaClient {
     
     public ArkaClient getClientByIDAndAgent(String clientID, String agentID) {
         ArkaClient client = null;
-        String query = "SELECT c.clientID, c.lastName, c.firstName, c.middleName, c.honorific, c.sex, c.dateOfBirth, c.civilStatus, " +
+        String query = "SELECT c.clientID, c.agentID, c.lastName, c.firstName, c.middleName, c.honorific, c.sex, c.dateOfBirth, c.civilStatus, " +
                        "c.placeOfBirth, ci.citizenship, ci.nationality, a.country, a.province, a.city, a.barangay, a.street, " +
-                       "c.contactNumber, c.emailAddress, c.occupation, c.companyName, i.annualIncome, i.sourceIncome, c.agentID " +
+                       "c.contactNumber, c.emailAddress, c.occupation, c.companyName, i.annualIncome, i.sourceIncome " +
                        "FROM client c " +
                        "JOIN address a ON c.clientID = a.clientID " +
                        "JOIN citizenship ci ON c.clientID = ci.clientID " +
@@ -566,6 +568,7 @@ public class ArkaClientManager extends ArkaClient {
                 if (rs.next()) {
                     client = new ArkaClient(
                         rs.getString("clientID"),
+                        rs.getString("agentID"),
                         rs.getString("lastName"),
                         rs.getString("firstName"),
                         rs.getString("middleName"),
@@ -586,8 +589,7 @@ public class ArkaClientManager extends ArkaClient {
                         rs.getString("occupation"),
                         rs.getString("companyName"),
                         rs.getInt("annualIncome"),
-                        rs.getString("sourceIncome"),
-                        rs.getString("agentID")
+                        rs.getString("sourceIncome")
                     );
                 }
             }
@@ -601,10 +603,8 @@ public class ArkaClientManager extends ArkaClient {
     }
     
     public void removeClientByID(String clientID) {
-        // Remove the client from the list
         clients.removeIf(client -> client.getClientID().equals(clientID));
     
-        // Delete the client from the database
         String query = "DELETE FROM client WHERE clientID = ?";
         try (Connection connection = ArkaDatabase.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
@@ -618,4 +618,7 @@ public class ArkaClientManager extends ArkaClient {
         }
     }
     
+    public String getLoggedInAgentID() {
+        return this.loggedInAgentID;
+    }    
 }

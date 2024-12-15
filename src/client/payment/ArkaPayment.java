@@ -17,13 +17,15 @@ public class ArkaPayment {
     private String paymentID;
     private String clientID;
     private String policyID;
+    private String agentID;
     private LocalDate paymentDate;
     private double paymentAmount;
     private LocalDate nextPayment;
     private LocalDate lastPayment;
 
-    public ArkaPayment(ArkaClient client, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
+    public ArkaPayment(ArkaClient client, String agentID, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
         this.clientID = client.getClientID();
+        this.agentID = agentID;
         this.paymentDate = LocalDate.now();
         this.paymentAmount = paymentAmount;
         this.paymentID = new ArkaClientManager().generatePaymentID();
@@ -50,34 +52,35 @@ public class ArkaPayment {
         String checkPolicySQL = "SELECT COUNT(*) FROM policy WHERE policyID = ?";
         try (Connection conn = db.ArkaDatabase.getConnection();
              PreparedStatement checkStatement = conn.prepareStatement(checkPolicySQL)) {
-
+    
             checkStatement.setString(1, this.policyID);
             ResultSet resultSet = checkStatement.executeQuery();
+    
             if (resultSet.next() && resultSet.getInt(1) == 0) {
                 System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
                 System.out.println("Policy ID not found.");
                 return;
             }
-
-            String sql = "INSERT INTO payment (paymentID, clientID, policyID, paymentDate, paymentAmount, nextPayment, lastPayment) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    
+            String sql = "INSERT INTO payment (paymentID, clientID, agentID, policyID, paymentDate, paymentAmount, nextPayment, lastPayment) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = conn.prepareStatement(sql)) {
                 statement.setString(1, this.paymentID);
                 statement.setString(2, this.clientID);
-                statement.setString(3, this.policyID);
-                statement.setDate(4, java.sql.Date.valueOf(this.paymentDate));
-                statement.setDouble(5, this.paymentAmount);
-                statement.setDate(6, this.nextPayment != null ? java.sql.Date.valueOf(this.nextPayment) : null);
-                statement.setDate(7, java.sql.Date.valueOf(this.lastPayment));
-
+                statement.setString(3, this.agentID);
+                statement.setString(4, this.policyID);
+                statement.setDate(5, java.sql.Date.valueOf(this.paymentDate));
+                statement.setDouble(6, this.paymentAmount);
+                statement.setDate(7, this.nextPayment != null ? java.sql.Date.valueOf(this.nextPayment) : null);
+                statement.setDate(8, java.sql.Date.valueOf(this.lastPayment));
                 int rowsInserted = statement.executeUpdate();
+
                 if (rowsInserted > 0) {
                     System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                     System.out.println("Payment successfully processed!");
                     printReceipt();
-
+    
                     updatePolicyStatus(conn);
                 }
-
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
@@ -86,9 +89,9 @@ public class ArkaPayment {
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
-            System.out.println("Error checking policy ID.");
+            System.out.println("Error checking policy or database connection.");
         }
-    }
+    }    
 
     private void updatePolicyStatus(Connection conn) throws SQLException {
         String policyStatusSQL = "UPDATE policy SET status = ? WHERE policyID = ?";
@@ -138,8 +141,8 @@ public class ArkaPayment {
         }
     }
 
-    public static void collectAndProcessPayment(Scanner scanner, ArkaClient client, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
-        ArkaPayment paymentHandler = new ArkaPayment(client, policy, paymentAmount, paymentFrequency, paymentPeriod);
+    public static void collectAndProcessPayment(Scanner scanner, ArkaClient client, String loggedInAgentID, ArkaPolicy policy, double paymentAmount, String paymentFrequency, int paymentPeriod) {
+        ArkaPayment paymentHandler = new ArkaPayment(client, loggedInAgentID, policy, paymentAmount, paymentFrequency, paymentPeriod);
         paymentHandler.settlePayment();
-    }
+    }    
 }

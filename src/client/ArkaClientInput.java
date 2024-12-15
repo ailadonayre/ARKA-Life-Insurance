@@ -122,8 +122,8 @@ public class ArkaClientInput {
         System.out.print("Source of Income: ");
         String sourceIncome = scanner.nextLine();
 
-        return new ArkaClient(clientID, lastName, firstName, middleName, honorific, sex, dateOfBirth, civilStatus,
+        return new ArkaClient(clientID, agentID, lastName, firstName, middleName, honorific, sex, dateOfBirth, civilStatus,
                 placeOfBirth, citizenship, nationality, country, province, city, barangay, street, contactNumber,
-                emailAddress, occupation, companyName, annualIncome, sourceIncome, agentID);
+                emailAddress, occupation, companyName, annualIncome, sourceIncome);
     }
 }

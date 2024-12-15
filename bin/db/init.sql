@@ -33,7 +33,7 @@ CREATE TABLE `address` (
   PRIMARY KEY (`addressID`),
   KEY `fk_clientID_address` (`clientID`),
   CONSTRAINT `address_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` (`addressID`, `clientID`, `country`, `province`, `city`, `barangay`, `street`) VALUES (24,'BZKFC71622','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(25,'OINRZ46347','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(26,'IHNFY39071','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(37,'RHOLC27667','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street');
+INSERT INTO `address` VALUES (24,'BZKFC71622','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(25,'OINRZ46347','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(26,'IHNFY39071','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(37,'RHOLC27667','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(38,'ZZDBE13965','Philippines','Batangas','Batangas City','Alangilan','Street 143'),(39,'MAOMY09436','Philippines','Batangas','Lipa City','San Carlos','Delta Street'),(42,'LRKIR84960','Philippines','Batangas','Batangas City','Kumintang Ibaba','Sterling Street'),(46,'CSOSK16700','Philippines','Cavite','Cavite City','Barangay 8','127 Street');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -68,7 +68,7 @@ CREATE TABLE `agent` (
 
 LOCK TABLES `agent` WRITE;
 /*!40000 ALTER TABLE `agent` DISABLE KEYS */;
-INSERT INTO `agent` (`agentID`, `username`, `password`) VALUES ('24-28346','tmmanuel','tmmanuel'),('24-29375','thalia','manueltm'),('24-69992','roshieleaila','roshiele'),('24-77691','ailaroshiele','roshiele');
+INSERT INTO `agent` VALUES ('24-14316','test','testpass'),('24-28346','tmmanuel','tmmanuel'),('24-29375','thalia','manueltm'),('24-66763','demo','demopass'),('24-69992','roshieleaila','roshiele'),('24-76167','donayre','donayreaila'),('24-77691','ailaroshiele','roshiele');
 /*!40000 ALTER TABLE `agent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +87,7 @@ CREATE TABLE `citizenship` (
   PRIMARY KEY (`citizenshipID`),
   KEY `fk_clientID_citizenship` (`clientID`),
   CONSTRAINT `citizenship_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `citizenship` (
 
 LOCK TABLES `citizenship` WRITE;
 /*!40000 ALTER TABLE `citizenship` DISABLE KEYS */;
-INSERT INTO `citizenship` (`citizenshipID`, `clientID`, `citizenship`, `nationality`) VALUES (24,'BZKFC71622','Filipino','Filipino'),(25,'OINRZ46347','Filipino','Filipino'),(26,'IHNFY39071','Filipino','Filipino'),(37,'RHOLC27667','Filipino','Filipino');
+INSERT INTO `citizenship` VALUES (24,'BZKFC71622','Filipino','Filipino'),(25,'OINRZ46347','Filipino','Filipino'),(26,'IHNFY39071','Filipino','Filipino'),(37,'RHOLC27667','Filipino','Filipino'),(38,'ZZDBE13965','Filipino','Filipino'),(39,'MAOMY09436','Filipino','Filipino'),(42,'LRKIR84960','Filipino','Filipino'),(46,'CSOSK16700','Filipino-Korean','South Korean');
 /*!40000 ALTER TABLE `citizenship` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,6 +109,7 @@ DROP TABLE IF EXISTS `client`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `client` (
   `clientID` varchar(10) NOT NULL,
+  `agentID` varchar(10) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
   `firstName` varchar(100) DEFAULT NULL,
   `middleName` varchar(100) DEFAULT NULL,
@@ -121,12 +122,11 @@ CREATE TABLE `client` (
   `emailAddress` varchar(100) DEFAULT NULL,
   `occupation` varchar(100) DEFAULT NULL,
   `companyName` varchar(100) DEFAULT NULL,
-  `agentID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`clientID`),
   UNIQUE KEY `unique_email` (`emailAddress`),
   UNIQUE KEY `unique_contactNumber` (`contactNumber`),
-  KEY `agentID` (`agentID`),
-  CONSTRAINT `client_ibfk_1` FOREIGN KEY (`agentID`) REFERENCES `agent` (`agentID`)
+  KEY `client_ibfk_1` (`agentID`),
+  CONSTRAINT `client_ibfk_1` FOREIGN KEY (`agentID`) REFERENCES `agent` (`agentID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -136,7 +136,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` (`clientID`, `lastName`, `firstName`, `middleName`, `honorific`, `sex`, `dateOfBirth`, `civilStatus`, `placeOfBirth`, `contactNumber`, `emailAddress`, `occupation`, `companyName`, `agentID`) VALUES ('BZKFC71622','Donayre','Rosemarie','Carag','Mrs.','Female','1970-06-03','Widowed','San Juan, Batangas','09988584015','rosemariedonayre90@gmail.com','Landlady','N/A','24-77691'),('IHNFY39071','Donayre','Aila Roshiele','Carag','Ms.','Female','2005-03-25','Single','Batangas City, Batangas','09452971404','ailaroshieledonayre@gmail.com','Student','N/A','24-69992'),('OINRZ46347','Manuel','Shiela May','Donayre','Mrs.','Female','1992-06-07','Married','Batangas City, Batangas','09618412073','shieladonayre@gmail.com','Landlady','N/A','24-69992'),('RHOLC27667','Donayre','Aljon Mart Kenneth','Carag','Mr.','Male','1990-07-22','Single','Batangas City, Batangas','09937428524','amkdonayre@gmail.com','OFW','ADNOC','24-77691');
+INSERT INTO `client` VALUES ('BZKFC71622','24-77691','Donayre','Rosemarie','Carag','Mrs.','Female','1970-06-03','Widowed','San Juan, Batangas','09988584015','rosemariedonayre90@gmail.com','Landlady','N/A'),('CSOSK16700','24-14316','Lee','Mark','','Mr.','Male','1999-08-02','Single','Cavite City, Cavite','09834573012','marklee@gmail.com','Song Producer','SM Entertainment'),('IHNFY39071','24-69992','Donayre','Aila Roshiele','Carag','Ms.','Female','2005-03-25','Single','Batangas City, Batangas','09452971404','ailaroshieledonayre@gmail.com','Student','N/A'),('LRKIR84960','24-66763','Manuel','Thalia','Donayre','Ms.','Female','2007-07-27','Single','Batangas City, Batangas','09458710342','thaliamanuel@gmail.com','Student','N/A'),('MAOMY09436','24-76167','Chavez','Ana','Javier','Ms.','Female','1987-12-31','Single','Lipa City','09926894043','chavezanaj@gmail.com','Hairdresser','Elitista Salon'),('OINRZ46347','24-69992','Manuel','Shiela May','Donayre','Mrs.','Female','1992-06-07','Married','Batangas City, Batangas','09618412073','shieladonayre@gmail.com','Landlady','N/A'),('RHOLC27667','24-77691','Donayre','Aljon Mart Kenneth','Carag','Mr.','Male','1990-07-22','Single','Batangas City, Batangas','09937428524','amkdonayre@gmail.com','OFW','ADNOC'),('ZZDBE13965','24-76167','Perez','Kent Benedict','Ramos','Mr.','Male','2005-09-08','Single','Batangas City','09611402462','kentperez@gmail.com','Student','N/A');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +155,7 @@ CREATE TABLE `income` (
   PRIMARY KEY (`incomeID`),
   KEY `fk_clientID_income` (`clientID`),
   CONSTRAINT `fk_clientID_income` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `income` (
 
 LOCK TABLES `income` WRITE;
 /*!40000 ALTER TABLE `income` DISABLE KEYS */;
-INSERT INTO `income` (`incomeID`, `clientID`, `sourceIncome`, `annualIncome`) VALUES (23,'BZKFC71622','Business',240000),(24,'OINRZ46347','Business',300000),(25,'IHNFY39071','Scholarships',50000),(36,'RHOLC27667','Salary',500000);
+INSERT INTO `income` VALUES (23,'BZKFC71622','Business',240000),(24,'OINRZ46347','Business',300000),(25,'IHNFY39071','Scholarships',50000),(36,'RHOLC27667','Salary',500000),(37,'ZZDBE13965','Student Allowance',75000),(38,'MAOMY09436','Salary',150000),(41,'LRKIR84960','Scholarships',84000),(45,'CSOSK16700','Salary',9000000);
 /*!40000 ALTER TABLE `income` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,6 +178,7 @@ DROP TABLE IF EXISTS `payment`;
 CREATE TABLE `payment` (
   `paymentID` int NOT NULL AUTO_INCREMENT,
   `clientID` varchar(10) DEFAULT NULL,
+  `agentID` varchar(10) DEFAULT NULL,
   `policyID` varchar(20) DEFAULT NULL,
   `paymentDate` date DEFAULT NULL,
   `paymentAmount` decimal(10,2) DEFAULT NULL,
@@ -186,6 +187,8 @@ CREATE TABLE `payment` (
   PRIMARY KEY (`paymentID`),
   KEY `clientID` (`clientID`),
   KEY `policyID` (`policyID`),
+  KEY `fk_payment_agentID` (`agentID`),
+  CONSTRAINT `fk_payment_agentID` FOREIGN KEY (`agentID`) REFERENCES `agent` (`agentID`) ON DELETE CASCADE,
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE,
   CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`policyID`) REFERENCES `policy` (`policyID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8499083 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -197,7 +200,7 @@ CREATE TABLE `payment` (
 
 LOCK TABLES `payment` WRITE;
 /*!40000 ALTER TABLE `payment` DISABLE KEYS */;
-INSERT INTO `payment` (`paymentID`, `clientID`, `policyID`, `paymentDate`, `paymentAmount`, `nextPayment`, `lastPayment`) VALUES (3939045,'OINRZ46347','A56049KE','2024-11-17',270000.00,'2025-11-17','2034-11-17'),(5238994,'RHOLC27667','A99863DI','2024-11-19',142500.00,'2025-11-19','2044-11-19'),(8135134,'IHNFY39071','A32909AL','2024-11-17',7000.00,'2025-11-17','2059-11-17'),(8499082,'BZKFC71622','A44870PF','2024-11-17',270000.00,'2025-11-17','2034-11-17');
+INSERT INTO `payment` VALUES (822284,'CSOSK16700',NULL,'A88522HN','2024-12-15',96000.00,'2025-12-15','2034-12-15'),(1799126,'MAOMY09436','24-76167','A23600KC','2024-12-12',28000.00,'2025-12-12','2059-12-12'),(3615445,'LRKIR84960','24-66763','A36656BO','2024-12-12',28000.00,'2025-12-12','2059-12-12'),(3939045,'OINRZ46347','24-69992','A56049KE','2024-11-17',270000.00,'2025-11-17','2034-11-17'),(5238994,'RHOLC27667','24-77691','A99863DI','2024-11-19',142500.00,'2025-11-19','2044-11-19'),(6523942,'ZZDBE13965','24-76167','A32038UC','2024-12-12',11500.00,'2025-12-12','2044-12-12'),(8135134,'IHNFY39071','24-69992','A32909AL','2024-11-17',7000.00,'2025-11-17','2059-11-17'),(8499082,'BZKFC71622','24-77691','A44870PF','2024-11-17',270000.00,'2025-11-17','2034-11-17');
 /*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -211,6 +214,7 @@ DROP TABLE IF EXISTS `policy`;
 CREATE TABLE `policy` (
   `policyID` varchar(20) NOT NULL,
   `clientID` varchar(20) DEFAULT NULL,
+  `agentID` varchar(10) DEFAULT NULL,
   `policyType` varchar(50) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
@@ -223,7 +227,9 @@ CREATE TABLE `policy` (
   `beneficiaryRelationship` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`policyID`),
   KEY `fk_clientID_policy` (`clientID`),
-  CONSTRAINT `fk_clientID_policy` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE
+  KEY `fk_policy_agentID` (`agentID`),
+  CONSTRAINT `fk_clientID_policy` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE,
+  CONSTRAINT `fk_policy_agentID` FOREIGN KEY (`agentID`) REFERENCES `agent` (`agentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -233,7 +239,7 @@ CREATE TABLE `policy` (
 
 LOCK TABLES `policy` WRITE;
 /*!40000 ALTER TABLE `policy` DISABLE KEYS */;
-INSERT INTO `policy` (`policyID`, `clientID`, `policyType`, `startDate`, `endDate`, `premiumAmount`, `coverageAmount`, `paymentPeriod`, `paymentFrequency`, `status`, `beneficiaryName`, `beneficiaryRelationship`) VALUES ('A32909AL','IHNFY39071','Tanso Plan','2024-11-17','2106-03-24',7000.00,250000.00,35,'Annually','ACTIVE','Rosemarie C. Donayre','Mother'),('A44870PF','BZKFC71622','Ginto Plan','2024-11-17','2071-06-02',270000.00,3000000.00,10,'Annually','ACTIVE','Aila Roshiele C. Donayre','Daughter'),('A56049KE','OINRZ46347','Ginto Plan','2024-11-17','2093-06-06',270000.00,3000000.00,10,'Annually','ACTIVE','Thalia D. Manuel','Daughter'),('A99863DI','RHOLC27667','Ginto Plan','2024-11-19','2091-07-21',142500.00,3000000.00,20,'Annually','ACTIVE','Rosemarie C. Donayre','Mother');
+INSERT INTO `policy` VALUES ('A23600KC','MAOMY09436','24-76167','Pilak Plan','2024-12-12','2088-12-30',28000.00,1000000.00,35,'Annually','ACTIVE','Severino Chavez','Father'),('A32038UC','ZZDBE13965','24-76167','Tanso Plan','2024-12-12','2106-09-07',11500.00,250000.00,20,'Annually','ACTIVE','Lorna Perez','Mother'),('A32909AL','IHNFY39071','24-69992','Tanso Plan','2024-11-17','2106-03-24',7000.00,250000.00,35,'Annually','ACTIVE','Rosemarie C. Donayre','Mother'),('A36656BO','LRKIR84960','24-66763','Pilak Plan','2024-12-12','2108-07-26',28000.00,1000000.00,35,'Annually','ACTIVE','Shiela May Manuel','Mother'),('A44870PF','BZKFC71622','24-77691','Ginto Plan','2024-11-17','2071-06-02',270000.00,3000000.00,10,'Annually','ACTIVE','Aila Roshiele C. Donayre','Daughter'),('A56049KE','OINRZ46347','24-69992','Ginto Plan','2024-11-17','2093-06-06',270000.00,3000000.00,10,'Annually','ACTIVE','Thalia D. Manuel','Daughter'),('A88522HN','CSOSK16700',NULL,'Pilak Plan','2024-12-15','2100-08-01',96000.00,1000000.00,10,'Annually','ACTIVE','Ten Lee','Brother'),('A99863DI','RHOLC27667','24-77691','Ginto Plan','2024-11-19','2091-07-21',142500.00,3000000.00,20,'Annually','ACTIVE','Rosemarie C. Donayre','Mother');
 /*!40000 ALTER TABLE `policy` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -246,4 +252,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-12-12 16:11:29
+-- Dump completed on 2024-12-15 14:41:27
