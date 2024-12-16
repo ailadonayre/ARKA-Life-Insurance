@@ -112,21 +112,26 @@ public class ArkaDatabase {
     private void createPolicyTable() throws SQLException {
         String createPolicyTableSQL = "CREATE TABLE `policy` ("
                 + "`policyID` varchar(20) NOT NULL, "
-                + "`clientID` varchar(10) NOT NULL, "
+                + "`clientID` varchar(20) NOT NULL, "
+                + "`agentID` varchar(10) DEFAULT NULL, "
                 + "`policyType` varchar(50) NOT NULL, "
+                + "`startDate` date DEFAULT NULL, "
+                + "`endDate` date DEFAULT NULL, "
+                + "`premiumAmount` decimal(15,2) NOT NULL, "
                 + "`coverageAmount` decimal(15,2) NOT NULL, "
-                + "`policyDate` date DEFAULT NULL, "
-                + "`policyEndDate` date DEFAULT NULL, "
-                + "`beneficiaries` varchar(255) NOT NULL, "
-                + "`agentID` varchar(10) NOT NULL, "
+                + "`paymentPeriod` int NOT NULL, "
+                + "`paymentFrequency` varchar(50) NOT NULL, "
+                + "`status` enum('ACTIVE', 'INACTIVE') DEFAULT 'ACTIVE', "
+                + "`beneficiaryName` varchar(255) DEFAULT NULL, "
+                + "`beneficiaryRelationship` varchar(255) DEFAULT NULL, "
                 + "PRIMARY KEY (`policyID`), "
-                + "KEY `clientID` (`clientID`), "
+                + "UNIQUE KEY `unique_clientID` (`clientID`), "
                 + "KEY `fk_policy_agentID` (`agentID`), "
                 + "CONSTRAINT `fk_policy_agentID` FOREIGN KEY (`agentID`) REFERENCES `agent` (`agentID`) ON DELETE CASCADE, "
-                + "CONSTRAINT `policy_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
+                + "CONSTRAINT `fk_clientID_policy` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         executeSQL(createPolicyTableSQL);
-    }
+    }    
     
     private void createPaymentTable() throws SQLException {
         String createPaymentTableSQL = "CREATE TABLE `payment` ("
@@ -151,45 +156,39 @@ public class ArkaDatabase {
     
     private void createAddressTable() throws SQLException {
         String createAddressTableSQL = "CREATE TABLE `address` ("
-                + "`addressID` int NOT NULL AUTO_INCREMENT, "
                 + "`clientID` varchar(10) NOT NULL, "
                 + "`country` varchar(100) NOT NULL, "
                 + "`province` varchar(100) NOT NULL, "
                 + "`city` varchar(100) NOT NULL, "
                 + "`barangay` varchar(100) DEFAULT NULL, "
                 + "`street` varchar(100) DEFAULT NULL, "
-                + "PRIMARY KEY (`addressID`), "
-                + "KEY `fk_clientID_address` (`clientID`), "
-                + "CONSTRAINT `address_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
+                + "PRIMARY KEY (`clientID`), "
+                + "CONSTRAINT `fk_clientID_address` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         executeSQL(createAddressTableSQL);
-    }
+    }    
     
     private void createCitizenshipTable() throws SQLException {
         String createCitizenshipTableSQL = "CREATE TABLE `citizenship` ("
-                + "`citizenshipID` int NOT NULL AUTO_INCREMENT, "
                 + "`clientID` varchar(10) NOT NULL, "
                 + "`citizenship` varchar(100) NOT NULL, "
                 + "`nationality` varchar(100) NOT NULL, "
-                + "PRIMARY KEY (`citizenshipID`), "
-                + "KEY `fk_clientID_citizenship` (`clientID`), "
-                + "CONSTRAINT `citizenship_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
+                + "PRIMARY KEY (`clientID`), "
+                + "CONSTRAINT `fk_clientID_citizenship` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         executeSQL(createCitizenshipTableSQL);
-    }
+    }    
     
     private void createIncomeTable() throws SQLException {
         String createIncomeTableSQL = "CREATE TABLE `income` ("
-                + "`incomeID` int NOT NULL AUTO_INCREMENT, "
                 + "`clientID` varchar(10) NOT NULL, "
                 + "`sourceIncome` varchar(100) NOT NULL, "
                 + "`annualIncome` int NOT NULL, "
-                + "PRIMARY KEY (`incomeID`), "
-                + "KEY `fk_clientID_income` (`clientID`), "
-                + "CONSTRAINT `income_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
+                + "PRIMARY KEY (`clientID`), "
+                + "CONSTRAINT `fk_clientID_income` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`) ON DELETE CASCADE"
                 + ") ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci";
         executeSQL(createIncomeTableSQL);
-    }
+    }    
 
     private void executeSQL(String query) throws SQLException {
         try (Connection connection = getConnection(); Statement statement = connection.createStatement()) {

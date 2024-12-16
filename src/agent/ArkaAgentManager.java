@@ -12,6 +12,7 @@ import utils.ArkaCustom;
 public class ArkaAgentManager {
     private Scanner scanner = new Scanner(System.in);
     private String loggedInAgentID;
+    private String loggedInUsername;
 
     public String generateAgentID() {
         String yearSuffix = String.valueOf(java.time.Year.now().getValue()).substring(2);
@@ -127,6 +128,7 @@ public class ArkaAgentManager {
                         loggedInAgentID = resultSet.getString("agentID");
                         System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + "\t>> " + ArkaCustom.ANSI_RESET);
                         System.out.println("You have successfully signed in as " + ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_CYAN + resultSet.getString("username") + ArkaCustom.ANSI_RESET + "!");
+                        this.loggedInUsername = resultSet.getString("username");
                         return true;
                     } else {
                         System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
@@ -159,13 +161,11 @@ public class ArkaAgentManager {
     }
 
     public String getLoggedInAgentID() {
-        return loggedInAgentID;
+        return this.loggedInAgentID;
     }
 
-    public static void main(String[] args) {
-        ArkaAgentManager agentManager = new ArkaAgentManager();
-
-        agentManager.signUp();
-        agentManager.signIn();
+    // Getter for the logged-in username
+    public String getLoggedInUsername() {
+        return this.loggedInUsername;
     }
 }
