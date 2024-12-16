@@ -20,7 +20,6 @@ import utils.ArkaCustom;
 public class ArkaStatement {
     private Scanner scanner;
     private ArkaClientManager clientManager;
-    private String username;
 
      public ArkaStatement(Scanner scanner, ArkaClientManager clientManager) {
         this.scanner = scanner;
@@ -39,7 +38,6 @@ public class ArkaStatement {
             System.out.println(ArkaCustom.ANSI_BOLD + "\n-------------------------------------------------------------\n" + ArkaCustom.ANSI_RESET);
             System.out.println(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_PURPLE + spaces + "Proposal " + ArkaCustom.ANSI_RESET + ArkaCustom.ANSI_PURPLE + "Statement" + ArkaCustom.ANSI_RESET);
 
-            System.out.println(ArkaCustom.ANSI_BOLD + "\nAgent Username: " + ArkaCustom.ANSI_RESET + username);
             System.out.println(ArkaCustom.ANSI_BOLD + "\nOn the Life of: " + ArkaCustom.ANSI_RESET + client.getFullName());
             System.out.println(ArkaCustom.ANSI_BOLD + "Age: " + ArkaCustom.ANSI_RESET + calculateAge(client.getDateOfBirth()));
             System.out.println(ArkaCustom.ANSI_BOLD + "Chosen Insurance Plan: " + ArkaCustom.ANSI_RESET + chosenPolicy.getPlanName());
@@ -88,11 +86,11 @@ public class ArkaStatement {
 
             String policyID = clientManager.generatePolicyID(existingPolicyIDs);
 
-            String loggedInUsername = clientManager.getAgentID(username);
+            String loggedInAgentID = clientManager.getAgentByClientID(client.getClientID());
 
-            savePolicyDetails(policyID, client.getClientID(), loggedInUsername, chosenPolicy, startDate, endDate, paymentAmount, paymentPeriod, paymentFrequency, "ACTIVE", beneficiaryName, relationship);
+            savePolicyDetails(policyID, client.getClientID(), loggedInAgentID, chosenPolicy, startDate, endDate, paymentAmount, paymentPeriod, paymentFrequency, "ACTIVE", beneficiaryName, relationship);
 
-            ArkaPayment.collectAndProcessPayment(scanner, client, loggedInUsername, chosenPolicy, paymentAmount, paymentFrequency, paymentPeriod);
+            ArkaPayment.collectAndProcessPayment(scanner, client, loggedInAgentID, chosenPolicy, paymentAmount, paymentFrequency, paymentPeriod);
 
         } catch (Exception e) {
             System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);

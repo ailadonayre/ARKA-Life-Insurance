@@ -462,7 +462,28 @@ public class ArkaClientManager extends ArkaClient {
             System.out.println("Error fetching client by ID.");
         }
         return client;
-    } 
+    }
+    
+    public String getAgentByClientID(String clientID) {
+        String agentID = null;
+        String sql = "SELECT agentID FROM client WHERE clientID = ?";
+        
+        try (Connection conn = ArkaDatabase.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+            statement.setString(1, clientID);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                agentID = resultSet.getString("agentID");
+            }
+        } catch (SQLException e) {
+            System.out.print(ArkaCustom.ANSI_BOLD + ArkaCustom.ANSI_YELLOW + "\t>> " + ArkaCustom.ANSI_RESET);
+            System.out.println("Error fetching agent by clientID.");
+            e.printStackTrace();
+        }
+        
+        return agentID;
+    }
     
     public List<ArkaClient> getClientsByAgentID(String agentID) {
         List<ArkaClient> clients = new ArrayList<>();

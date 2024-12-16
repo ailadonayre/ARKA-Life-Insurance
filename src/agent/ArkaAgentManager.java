@@ -161,11 +161,11 @@ public class ArkaAgentManager {
     }
 
     public String getLoggedInAgentID() {
-        return this.loggedInAgentID;
+        return loggedInAgentID;
     }
 
     // Getter for the logged-in username
     public String getLoggedInUsername() {
-        return this.loggedInUsername;
+        return loggedInUsername;
     }
 }
