@@ -105,8 +105,8 @@ process. Furthermore, the development environment for this project was **Visual 
   │   │   └── ArkaClientManager.java
   │   ├── db
   │   │   └── ArkaDatabase.java
-  │   │   └── schema.png
   │   │   └── init.sql
+  │   │   └── schema.png
   │   ├── main
   │   │   └── Main.java
   │   ├── manager
